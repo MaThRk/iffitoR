@@ -1,0 +1,24 @@
+{
+    "id": "1AE9B64E",
+    "path": "C:/Users/robin/eurac/iffitoR/R/make_shapefile.R",
+    "project_path": "R/make_shapefile.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1607957105491.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "cursorPosition": "52,2",
+        "scrollLine": "18"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1607966185,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1607966185508,
+    "read_only": false,
+    "read_only_alternatives": []
+}
