@@ -2,4 +2,4 @@
 
 ## A simple vignette with some descriptions
 
-![vignette]()
+[vignette]("https://robinkohrs.github.io/iffitoR/docs/index.html")
