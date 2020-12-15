@@ -55,42 +55,50 @@
 #')
 #'}
 
-
-
-
-make_shapefile = function(database_dir,
-                          attribute_database_name,
-                          dictionary_database_name,
-                          shapefile,
-                          attri,
-                          joins,
-                          plot = FALSE) {
+make_shapefile = function(database_dir=NULL,
+                          attribute_database_name=NULL,
+                          dictionary_database_name=NULL,
+                          shapefile=NULL,
+                          attri=NULL,
+                          joins=NULL) {
 
    # establish connections
    conns = set_connection(database_dir)
-
    # set the right ones
    # there are some issues with indexing the list, for some reason we need to index conns with [[]]
    # to maintain a valid and open connection
    index_attr = which(grepl(attribute_database_name, names(conns)))
-   index_dict = which(grepl(dictionary_database_name, names(conns)))
+
+   if (!is.null(dictionary_database_name)) {
+      index_dict = which(grepl(dictionary_database_name, names(conns)))
+   }
 
    attr_database_conn = conns[[index_attr]]
-   dict_database_conn = conns[[index_dict]]
+
+   if (!is.null(dictionary_database_name)) {
+      dict_database_conn = conns[[index_dict]]
+   }
+
 
 
    # the table names are the attributes we can query
    # Especially the one in the attributes table are interesting
    table_names_attr = make_vector_table_names(attr_database_conn)
-   table_names_dict = make_vector_table_names(dict_database_conn)
+   if (!is.null(dictionary_database_name)) {
+      table_names_dict = make_vector_table_names(dict_database_conn)
+   }
 
    # create a csv file of the names of the databases
    # write_csvs(table_names = table_names, database_dir = database_dir)
 
    # make a list of dataframes(tables) for the attributes database
    dfs_attr = make_list_dataframes(attr_database_conn)
+
+
    # make a list of dataframes(tables) for the dictionary database
-   dfs_dict = make_list_dataframes(dict_database_conn)
+   if (!is.null(dictionary_database_name)) {
+      dfs_dict = make_list_dataframes(dict_database_conn)
+   }
 
    # check for each dataframe if they have an id and subid column
    log_vec = check_id(dfs_attr)
@@ -107,17 +115,17 @@ make_shapefile = function(database_dir,
    shape_joined_attri = join_shape_attributes(shape, tables_to_append_diretly, dfs_attr_iffi)
 
    # make the joins to the dictionary
-   joined_dicionary_tables_with_iffi_kodex = join_descriptions(joins, dfs_attr_iffi, dfs_dict)
+   if (!is.null(dictionary_database_name) | !is.null(joins)) {
+      joined_dicionary_tables_with_iffi_kodex = join_descriptions(joins, dfs_attr_iffi, dfs_dict)
+   }
 
    # join them to the shape
-   final_joined = join_descriptions_shape(joined_dicionary_tables_with_iffi_kodex, shape_joined_attri)
+   if (!is.null(dictionary_database_name) | !is.null(joins)) {
+      final_joined = join_descriptions_shape(joined_dicionary_tables_with_iffi_kodex, shape_joined_attri)
+   }
 
    # filter the columns we wanted
    final_selected = select_cols(final_joined, attri, joins)
-
-   if (plot) {
-      plot(st_geometry(final_selected), bbox=T)
-   }
 
    return(final_selected)
 

@@ -5,12 +5,12 @@
 \title{Main Function}
 \usage{
 make_shapefile(
-  database_dir,
-  attribute_database_name,
-  dictionary_database_name,
-  shapefile,
-  attri,
-  joins,
+  database_dir = NULL,
+  attribute_database_name = NULL,
+  dictionary_database_name = NULL,
+  shapefile = NULL,
+  attri = NULL,
+  joins = NULL,
   plot = FALSE
 )
 }

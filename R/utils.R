@@ -1,10 +1,10 @@
 #' Functions that help to query the data from the databases and build the shapefile
 
-#' @importFrom  dplyr select
-#' @importFrom  RODBC odbcDriverConnect
-#' @importFrom  tools file_path_sans_ext
-#' @importFrom sf st_read
-#' @importFrom  stringr str_split
+#' @import  dplyr
+#' @import  RODBC
+#' @import  tools
+#' @import  sf
+#' @import  stringr
 
 
 #'@NoRd
@@ -16,7 +16,7 @@ set_connection = function(database_dir) {
 
   # get the names
   names_databases = databases_found %>% basename(.) %>%
-    file_path_sans_ext(.)
+    tools::file_path_sans_ext(.)
 
 
   # setup the connections
