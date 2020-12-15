@@ -99,7 +99,7 @@ make_list_tables = function(conns) {
 
 #' @return  A single vector of table names for a single db connection
 #' @export
-#' @param db_conn A object if type ...
+#' @param db_conn A object if type RODBC
 make_vector_table_names = function(db_conn) {
   table_names = sqlTables(db_conn) %>%
     # dont choose those tables that have SYSTEM in them

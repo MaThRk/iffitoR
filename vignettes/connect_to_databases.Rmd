@@ -1,0 +1,49 @@
+---
+title: "Connect to database and create list of dataframes"
+author: "robinr"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+- load the packages
+
+```{r}
+library(iffitoR)
+```
+
+- connect to all the databases in the folder
+
+```{r}
+connections = iffitoR::set_connection(".")
+```
+
+- what have we got?
+
+```{r}
+connections
+```
+
+- now we can convert all the tables in one connection into a list of dataframe, by:
+
+```{r}
+# connect to the dictionary database
+list_of_dfs = iffitoR::make_list_dataframes(connections[[1]])
+
+for (i in seq_along(list_of_dfs)) {
+  print(paste0("Colums-Names in", names(list_of_dfs)[[i]]))
+  print(names(list_of_dfs[[i]]))
+  print("")
+}
+```
+
