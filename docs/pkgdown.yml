@@ -4,5 +4,6 @@ pkgdown_sha: ~
 articles:
   connect_to_databases: connect_to_databases.html
   example1: example1.html
-last_built: 2020-12-15T11:47Z
+  hardcoded_joins: hardcoded_joins.html
+last_built: 2020-12-15T15:41Z
 

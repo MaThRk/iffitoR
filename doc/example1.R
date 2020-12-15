@@ -48,5 +48,5 @@ joins = list(
 #res_gg
 
 ## ---- echo=F, fig.align='center', out.width="80%", out.height="80%"-----------
-#knitr::include_graphics("map1.png")
+knitr::include_graphics("map1.png")
 
