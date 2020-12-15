@@ -7,11 +7,10 @@
 #' @import  stringr
 #' @importFrom magrittr "%>%"
 
-
-
-#'@NoRd
+#' @export
+#' @param database_dir The directory where all the databases are
+#' @return A list with database-connections
 set_connection = function(database_dir) {
-  print(paste0("Working Directory: ", getwd()))
 
   #list all mdb file
   databases_found = list.files(database_dir, full.names = TRUE) %>%
@@ -38,6 +37,8 @@ set_connection = function(database_dir) {
       x
     ))
   })
+
+  # set the names
   names(connections) = names_databases
 
 
@@ -96,8 +97,9 @@ make_list_tables = function(conns) {
 }
 
 
-#' return a single vector of table names for a single db connection
-
+#' @return  A single vector of table names for a single db connection
+#' @export
+#' @param db_conn A object if type ...
 make_vector_table_names = function(db_conn) {
   table_names = sqlTables(db_conn) %>%
     # dont choose those tables that have SYSTEM in them
@@ -138,7 +140,7 @@ write_csvs = function(table_names, database_dir) {
 }
 
 #' turn a database connection into a list of dbs
-
+#' @export
 make_list_dataframes = function(db_conn) {
   # get all the tables
   tables_names = make_vector_table_names(db_conn)

@@ -6,6 +6,12 @@
 \usage{
 set_connection(database_dir)
 }
+\arguments{
+\item{database_dir}{The directory where all the databases are}
+}
+\value{
+A list with database-connections
+}
 \description{
 Functions that help to query the data from the databases and build the shapefile
 }
