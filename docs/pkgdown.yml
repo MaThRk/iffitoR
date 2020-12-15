@@ -1,0 +1,8 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  connect_to_databases: connect_to_databases.html
+  example1: example1.html
+last_built: 2020-12-15T11:47Z
+
