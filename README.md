@@ -2,4 +2,4 @@
 
 ## A simple vignette with some descriptions
 
-[vignette](articles/example1.html)
+[vignette](doc/example1.html)
