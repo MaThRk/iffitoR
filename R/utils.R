@@ -326,11 +326,12 @@ join_descriptions = function(joins, dfs_attr_iffi, dfs_dict){
     #------------
 
     # get the database, Table, column of the attribute datbase
-    table_attri = names(joins)[[i]] %>% str_split(., pattern = "\\.") %>% .[[1]] %>% .[[2]]
-    col_attri = names(joins)[[i]] %>% str_split(., pattern = "\\.") %>% .[[1]] %>% .[[3]]
+    table_attri = names(joins)[[i]] %>% stringr::str_split(., pattern = "\\.") %>% .[[1]] %>% .[[2]]
+    col_attri = names(joins)[[i]] %>% stringr::str_split(., pattern = "\\.") %>% .[[1]] %>% .[[3]]
 
     # find the attribute table
-    df_index = grep(pattern = table_attri, names(dfs_attr_iffi))
+    df_index = grep(pattern = paste0("^", table_attri, "$"), names(dfs_attr_iffi))
+    # select the column to join and the iffi kodex
     df = dfs_attr_iffi[[df_index]] %>% select(c(col_attri, "iffi_kodex"))
 
     #------------
@@ -338,12 +339,13 @@ join_descriptions = function(joins, dfs_attr_iffi, dfs_dict){
     # get the database, Table, column of the attribute datbase
     table_dict = joins[[i]] %>% stringr::str_split(., pattern = "\\.") %>% .[[1]] %>% .[[2]]
 
-
     cols_dict = sapply(joins[[i]], function(x) split_and_return(x), USE.NAMES = F)
 
     # find the dict table
     df_dict_index = grep(table_dict, names(dfs_dict))
     df_dict = dfs_dict[[df_dict_index]] %>% select(cols_dict)
+
+    #--------------------
 
     # join them
     merged = merge(df, df_dict, by.x = col_attri, by.y = cols_dict[[1]], all.x = T, all.y=F)
