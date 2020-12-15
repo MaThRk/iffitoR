@@ -2,4 +2,4 @@
 
 ## A simple vignette with some descriptions
 
-[vignette](docs/articles/example1.html)
+[vignette](https://robinkohrs.github.io/iffitoR/docs/index.html)
