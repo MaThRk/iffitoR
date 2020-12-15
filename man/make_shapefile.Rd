@@ -10,8 +10,7 @@ make_shapefile(
   dictionary_database_name = NULL,
   shapefile = NULL,
   attri = NULL,
-  joins = NULL,
-  plot = FALSE
+  joins = NULL
 )
 }
 \arguments{

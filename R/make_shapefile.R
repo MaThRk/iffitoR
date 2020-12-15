@@ -64,6 +64,7 @@ make_shapefile = function(database_dir=NULL,
 
    # establish connections
    conns = set_connection(database_dir)
+
    # set the right ones
    # there are some issues with indexing the list, for some reason we need to index conns with [[]]
    # to maintain a valid and open connection
@@ -78,8 +79,6 @@ make_shapefile = function(database_dir=NULL,
    if (!is.null(dictionary_database_name)) {
       dict_database_conn = conns[[index_dict]]
    }
-
-
 
    # the table names are the attributes we can query
    # Especially the one in the attributes table are interesting

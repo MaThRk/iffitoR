@@ -5,14 +5,25 @@
 #' @import  tools
 #' @import  sf
 #' @import  stringr
+#' @importFrom magrittr "%>%"
+
 
 
 #'@NoRd
 set_connection = function(database_dir) {
+  print(paste0("Working Directory: ", getwd()))
+
   #list all mdb file
   databases_found = list.files(database_dir, full.names = TRUE) %>%
     grep(".*\\.mdb", ., value = TRUE)
 
+
+  # if it did not find anything
+  if (length(databases_found) < 1) {
+    stop(call. = F, "No database 'mdb' could be found...")
+  } else{
+    print(paste0("Found Databases: ", databases_found))
+  }
 
   # get the names
   names_databases = databases_found %>% basename(.) %>%
