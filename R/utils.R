@@ -397,9 +397,9 @@ select_cols = function(df, attri, joins){
 
   for (i in seq_along(joins)) {
 
+    # will get the column-name of interest from the joins-list
     col = sapply(joins[[i]], function(x) split_and_return(x), USE.NAMES = F) %>% .[[2]]
     cols_dict[[i]] = col
-
   }
 
   final_cols = c("PIFF_ID", column_names, cols_dict)

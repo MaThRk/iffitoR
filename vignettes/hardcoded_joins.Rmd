@@ -28,6 +28,7 @@ join = "tbl_frane.Geologia.litologia" = c("diz_frane.diz_litologie.litologia",
 ```
 
 
+
 ## Landuse
 
 ```{r}
@@ -54,6 +55,14 @@ join = "tbl_frane.Generalita.Cod_tipo" = c("diz_frane.diz_tipo_movi.cod_tipo",
 ```
 
 
+## Material
+
+```{r}
+join = "tbl_frane.clas_ii_liv.materiale" = c("diz_frane.diz_materiali.materiale",
+                                             "diz_frane.diz_materiali.nome_materiale")
+```
+
+
 ## Watercontent
 
 ```{r}
@@ -62,19 +71,11 @@ join = "tbl_frane.clas_ii_liv.acqua" = c("diz_frane.diz_acqua.acqua",
 ```
 
 
-## Material
+## Velocity
 
 ```{r}
 join = "tbl_frane.clas_ii_liv.velocita" = c("diz_frane.diz_velocita.velocita",
                                              "diz_frane.diz_velocita.nome_velocita")
-```
-
-
-## Velocity
-
-```{r}
-join = "tbl_frane.clas_ii_liv.acqua" = c("diz_frane.diz_acqua.acqua",
-                                             "diz_frane.diz_acqua.nome_acqua")
 ```
 
 
