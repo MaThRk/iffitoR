@@ -374,8 +374,8 @@ join_descriptions_shape = function(list_of_dfs_dict, shape) {
 
   for(table_dict in list_of_dfs_dict){
     # test_list[[i]] = final_shape
-    print(nrow(final_shape))
-    print(nrow(table_dict))
+    # print(nrow(final_shape))
+    # print(nrow(table_dict))
 
     final_shape = join_on_iffikodex(final_shape, table_dict)
 
