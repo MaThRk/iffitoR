@@ -2,7 +2,7 @@
 
 The package (and the vignettes) can be installed with:
 
-`remotes::install_github("https://cran.r-project.org/bin/windows/Rtools/", build_vignettes=TRUE)`
+`remotes::install_github("httpshttps://github.com/RobinKohrs/iffitoR", build_vignettes=TRUE)`
 
 ## A simple vignette with some descriptions
 
