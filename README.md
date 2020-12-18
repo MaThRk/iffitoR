@@ -9,7 +9,7 @@ The package (and the vignettes) can be installed with:
 [Vignettes](https://robinkohrs.github.io/iffitoR/docs/index.html)
 
 
-![](local_data/anim.gif))
+![](local_data/anim.gif)
 
 
 
