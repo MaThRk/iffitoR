@@ -10,6 +10,12 @@ License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
+Imports:
+    dplyr,
+    RODBC,
+    tools,
+    sf,
+    stringr
 Suggests: 
     testthat (>= 2.0.0),
     knitr,
