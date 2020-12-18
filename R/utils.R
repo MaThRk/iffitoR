@@ -262,12 +262,16 @@ find_tables = function(list_of_dfs_with_iffi_kodex, attributes){ # great name...
 
 join_on_iffikodex = function(shape, table2){
 
-  if (! "NUMEROGIS" %in% names(shape)) {
+  # if the table to join on the shape has duplicates in the iffi-kodex, this will become huge
+  # so remove the duplicates ??
+  #table2 = table2 %>% dplyr::distinct(iffi_kodex, .keep_all = TRUE)
+
+  if (! "PIFF_ID" %in% names(shape)) {
     stop(call. = FALSE, "The does not have a column named NUMEROGIS")
   }
 
 
-  merged_sf = merge(shape, table2, by.x="PIFF_ID", by.y="iffi_kodex", all.x = T, all.y=FALSE)
+  merged_sf = merge(shape, table2, by.x="PIFF_ID", by.y="iffi_kodex", all.x = T, all.y=F)
 
   return(merged_sf)
 
@@ -322,6 +326,22 @@ join_descriptions = function(joins, dfs_attr_iffi, dfs_dict){
 
   for (i in seq_along(joins)) {
 
+    # make a vector of the three
+    elements_in_join = c(names(joins)[[i]], joins[[i]][[1]], joins[[i]][[2]])
+
+    # assert that all have 3 entries (db, table, col)
+    length_attri = elements_in_join[[1]] %>% stringr::str_split(., pattern = "\\.") %>% unlist() %>% length()
+    length_diz_key = elements_in_join[[2]] %>% stringr::str_split(., pattern = "\\.") %>% unlist() %>% length()
+    length_diz_value = elements_in_join[[3]] %>% stringr::str_split(., pattern = "\\.") %>% unlist() %>% length()
+
+    # vector of the three lengths
+    ll = c(length_attri, length_diz_key, length_div_value)
+
+    for (l in seq_along(ll)) {
+      if (ll[[l]] != 3) {
+        stop(call. = FALSE, paste0("You gave a wrong joins attribute\n", elements_in_join[[l]] ,"\n does not thave the three elements <database>.<table>.<column>"))
+      }
+    }
 
     #------------
 
@@ -370,12 +390,7 @@ join_descriptions_shape = function(list_of_dfs_dict, shape) {
 
   final_shape = shape
 
-  # test_list = vector("list"); i = 1
-
   for(table_dict in list_of_dfs_dict){
-    # test_list[[i]] = final_shape
-    # print(nrow(final_shape))
-    # print(nrow(table_dict))
 
     final_shape = join_on_iffikodex(final_shape, table_dict)
 

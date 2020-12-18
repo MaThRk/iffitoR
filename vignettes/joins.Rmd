@@ -82,7 +82,7 @@ join = "tbl_frane.clas_ii_liv.velocita" = c("diz_frane.diz_velocita.velocita",
 ## Cause
 
 ```{r}
-join = "tbl_frane.ass_gen_cause" = c("diz_frane.diz_cause.causa",
+join = "tbl_frane.ass_gen_cause.causa" = c("diz_frane.diz_cause.causa",
                                       "diz_frane.diz_cause.nome_causa")
 ```
 
