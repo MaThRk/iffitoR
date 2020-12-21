@@ -5,6 +5,7 @@
 #' @import  tools
 #' @import  sf
 #' @import  stringr
+#' @import  GADMTools
 #' @importFrom magrittr "%>%"
 
 #' @export
@@ -335,7 +336,7 @@ join_descriptions = function(joins, dfs_attr_iffi, dfs_dict){
     length_diz_value = elements_in_join[[3]] %>% stringr::str_split(., pattern = "\\.") %>% unlist() %>% length()
 
     # vector of the three lengths
-    ll = c(length_attri, length_diz_key, length_div_value)
+    ll = c(length_attri, length_diz_key, length_diz_value)
 
     for (l in seq_along(ll)) {
       if (ll[[l]] != 3) {
@@ -424,4 +425,13 @@ select_cols = function(df, attri, joins){
 
   return(df)
 
+}
+
+
+
+#' @export
+get_shape_southtyrol = function(){
+  italy = gadm_sf_loadCountries("ITA", level=3)$sf %>% st_transform(st_crs(25832))
+  south_tyrol = italy %>% filter(grepl("Bolzano", NAME_2))
+  return(south_tyrol)
 }

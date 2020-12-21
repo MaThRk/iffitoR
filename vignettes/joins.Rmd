@@ -88,5 +88,3 @@ join = "tbl_frane.ass_gen_cause.causa" = c("diz_frane.diz_cause.causa",
 
 
 
-
-
