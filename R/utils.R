@@ -258,14 +258,14 @@ find_tables = function(list_of_dfs_with_iffi_kodex, attributes){ # great name...
 }
 
 
-#' joins a sinle sf-object with a column "PIFF_ID" to another table
-#' with a column "iffi_kodex"
+#' joins a single sf-object with a column "PIFF_ID" to another table
+#' with a column "iffi_kodex" that gets created in the function "create_iffi_kodex"
 
 join_on_iffikodex = function(shape, table2){
 
   # if the table to join on the shape has duplicates in the iffi-kodex, this will become huge
   # so remove the duplicates ??
-  #table2 = table2 %>% dplyr::distinct(iffi_kodex, .keep_all = TRUE)
+  table2 = table2 %>% dplyr::distinct(iffi_kodex, .keep_all = TRUE)
 
   if (! "PIFF_ID" %in% names(shape)) {
     stop(call. = FALSE, "The does not have a column named NUMEROGIS")
@@ -402,7 +402,7 @@ join_descriptions_shape = function(list_of_dfs_dict, shape) {
 
 }
 
-
+#' @export
 select_cols = function(df, attri, joins){
 
   # the directly selected columns

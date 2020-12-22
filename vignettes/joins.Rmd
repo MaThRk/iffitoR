@@ -88,3 +88,11 @@ join = "tbl_frane.ass_gen_cause.causa" = c("diz_frane.diz_cause.causa",
 
 
 
+## style
+
+
+```{r}
+join = "tbl_frane.Attivita.stile" = c("diz_frane.diz_stile.stile",
+                                      "diz_frane.diz_stile.nome_stile")
+```
+
