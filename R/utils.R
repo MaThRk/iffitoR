@@ -258,9 +258,9 @@ find_tables = function(list_of_dfs_with_iffi_kodex, attributes){ # great name...
 }
 
 
-#' joins a single sf-object with a column "PIFF_ID" to another table
-#' with a column "iffi_kodex" that gets created in the function "create_iffi_kodex"
-
+#' @export
+# joins a single sf-object with a column "PIFF_ID" to another table
+# with a column "iffi_kodex" that gets created in the function "create_iffi_kodex"
 join_on_iffikodex = function(shape, table2){
 
   # if the table to join on the shape has duplicates in the iffi-kodex, this will become huge
