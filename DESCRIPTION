@@ -15,7 +15,7 @@ Imports:
     RODBC,
     tools,
     sf,
-    stringr
+    stringr,
     GADMTools
 Suggests: 
     testthat (>= 2.0.0),
