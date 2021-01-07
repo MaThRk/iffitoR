@@ -16,6 +16,7 @@ Imports:
     tools,
     sf,
     stringr
+    GADMTools
 Suggests: 
     testthat (>= 2.0.0),
     knitr,

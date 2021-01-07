@@ -427,8 +427,6 @@ select_cols = function(df, attri, joins){
 
 }
 
-
-
 #' @export
 get_shape_southtyrol = function(){
   italy = gadm_sf_loadCountries("ITA", level=3)$sf %>% st_transform(st_crs(25832))
