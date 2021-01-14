@@ -6,7 +6,7 @@ The package (and the vignettes) can be installed with:
 
 ## A simple vignette with some descriptions
 
-[Vignettes](https://robinkohrs.github.io/iffitoR/docs/index.html)
+[Vignettes](./docs/index.html)
 
 
 ![](local_data/anim.gif)
