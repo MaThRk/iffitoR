@@ -8,8 +8,9 @@ The package (and the vignettes) can be installed with:
 
 [Vignettes](https://robinkohrs.github.io/iffitoR/docs/index.html)
 
+***
 
-![](inst/anim.gif)
+![](inst/anim.gif){width=50%}
 
 
 
