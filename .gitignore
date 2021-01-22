@@ -1,6 +1,8 @@
 inst/doc
-.Rproj.user
+.Rproj.user*
 Meta
 local_tests*
 doc
 local_data*
+
+.Rproj.user

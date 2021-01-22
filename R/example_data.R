@@ -5,7 +5,7 @@
 #'
 #' @docType data
 #'
-#' @usage data(lndsld)
+#' @usage data(minimal)
 #'
 #' @format An object of class \code{"sf"}
 #'
