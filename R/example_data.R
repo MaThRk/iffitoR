@@ -7,7 +7,6 @@
 #' @format An object of class \code{"sf"}
 #'
 #' @keywords dataset
-#'
 #' @examples
 #' data(lndsld)
 #' dim(lndsld)
