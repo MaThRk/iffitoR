@@ -2,7 +2,7 @@
 #'
 #' @export
 #'
-translate = function(df) {
+translate_iffi = function(df) {
 
   df = df %>%
 
