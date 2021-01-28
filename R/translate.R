@@ -39,6 +39,12 @@ translate_iffi = function(df) {
       tipologia = str_replace(tipologia, pattern = "DGPV", replacement = "deep seated landslide"),
       tipologia = str_replace(tipologia, pattern = "Sprofondamento", replacement = "subsidence"),
       tipologia = str_replace(tipologia, pattern = "Aree soggette a sprofondamenti diffusi", replacement = "area of diffuse subsidence")
+    ) %>%
+
+    # rename the actual variables
+    mutate(
+      first_level = tipologia,
+      second_level = nome_movimento
     )
 
   return(df)
