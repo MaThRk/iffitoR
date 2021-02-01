@@ -48,7 +48,11 @@ get_date_information = function(res) {
   res = res %>%
     select(-c(anno_min, mese_min, giorno_min))
 
-  return(res)
+  cat("\nAdded the columns:\n\n date_info (chr) - (eiher 'year', 'month', 'day' or 'no date')\n year.int (integer)
+ month.int (integer)
+ day.int (integer)
+ year.posix (date) (object of class date, referenced to the 1st of January of the year)\n\n")
 
+  return(res)
 
 }
