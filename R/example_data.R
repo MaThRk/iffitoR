@@ -81,6 +81,7 @@ res = iffitoR::make_shapefile(database_dir = database_dir,
 
 # translate it to english
 res_engl = iffitoR::translate_iffi(res)
+landsld = iffitoR::get_date_information(res_engl)
 
 
-usethis::use_da
+usethis::use_data(landsld, overwrite = T)
