@@ -5,7 +5,7 @@
 translate_iffi = function(df) {
 
   # do some checking
-  if(!"anno_min|mese_min|giorno_min|tipologia|nome_movimento" %in% names(df)){
+  if(!any(grepl("anno_min|mese_min|giorno_min|tipologia|nome_movimento", names(df)))){
     stop("some of the necessary columns are'n present in the dataframe provided, ",
          "Did you pass the dataframe directly to the translate-funtion after you created it with make_shapefile?")
   }

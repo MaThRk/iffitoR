@@ -20,8 +20,6 @@
 #' @param attri A vector of attributes to query directly from the attributes database
 #' @param join A named list of the tables that need to be joined in order to get the desciptions from the dictionary
 #' @export
-
-
 #' @examples
 #' \dontrun{
 #'database_dir = "data/database/",
