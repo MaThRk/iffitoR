@@ -4,6 +4,13 @@
 #'
 translate_iffi = function(df) {
 
+  # do some checking
+  if(!"anno_min|mese_min|giorno_min|tipologia|nome_movimento" %in% names(df)){
+    stop("some of the necessary columns are'n present in the dataframe provided, ",
+         "Did you pass the dataframe directly to the translate-funtion after you created it with make_shapefile?")
+  }
+
+
   df = df %>%
 
     # rename the values in nome_movimento
@@ -18,7 +25,7 @@ translate_iffi = function(df) {
       nome_movimento = str_replace_all(nome_movimento, pattern = 'col.*rapido"', replacement = "fast flow"),
       nome_movimento = str_replace(nome_movimento, pattern = "ribalmento", replacement = "overturn"),
       nome_movimento = str_replace(nome_movimento, pattern = "DGPV", replacement = "deep seated landslide"),
-      nome_movimento = str_replace(nome_movimento, pattern = "Sprofondamento", replacement = "subsidence"),
+      nome_movimento = str_replace(nome_movimento, pattern = "sprofondamento", replacement = "subsidence"),
       nome_movimento = str_replace(nome_movimento, pattern = "Aree soggette a frane superficiali diffuse", replacement = "area of diffuse surface slides"),
       nome_movimento = str_replace(nome_movimento, pattern = "espansione", replacement = "expansion"),
 
