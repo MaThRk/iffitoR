@@ -1,4 +1,4 @@
-#' Main Function
+#' The main funtion in order to retrieve the data from the iffi
 
 #' @import dplyr
 #' @import RODBC
