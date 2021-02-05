@@ -22,7 +22,7 @@ translate_iffi = function(df) {
       nome_movimento = str_replace(nome_movimento, pattern = "scivolamento rotazionale", replacement = "rotational slide"),
       nome_movimento = str_replace(nome_movimento, pattern = "Aree soggette a sprofondamenti diffusi", replacement = "areas subject to subsidence"),
       nome_movimento = str_replace(nome_movimento, pattern = 'col.*lento"', replacement = "slow flow-type"),
-      nome_movimento = str_replace_all(nome_movimento, pattern = 'col.*rapido"', replacement = "fast flow-type"),
+      nome_movimento = str_replace(nome_movimento, pattern = 'col.*rapido"', replacement = "fast flow-type"),
       nome_movimento = str_replace(nome_movimento, pattern = "ribaltamento", replacement = "topple"),
       nome_movimento = str_replace(nome_movimento, pattern = "DGPV", replacement = "deep-seated movement"),
       nome_movimento = str_replace(nome_movimento, pattern = "sprofondamento", replacement = "subsidence"),

@@ -1,11 +1,11 @@
 #' Functions that help to query the data from the databases and build the shapefile
 
-#' @import  dplyr
-#' @import  RODBC
-#' @import  tools
-#' @import  sf
-#' @import  stringr
-#' @import  GADMTools
+#' @importFrom dplyr select filter distinct mutate if_else
+#' @importFrom  RODBC sqlFetch sqlTables
+#' @importFrom  tools file_path_sans_ext
+#' @importFrom  sf st_transform st_read
+#' @importFrom  stringr str_split str_replace
+#' @importFrom  GADMTools gadm_sf_loadCountries
 #' @importFrom magrittr "%>%"
 
 #' @export

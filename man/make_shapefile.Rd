@@ -2,7 +2,7 @@
 % Please edit documentation in R/make_shapefile.R
 \name{make_shapefile}
 \alias{make_shapefile}
-\title{Main Function}
+\title{The main funtion in order to retrieve the data from the iffi}
 \usage{
 make_shapefile(
   database_dir = NULL,

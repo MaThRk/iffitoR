@@ -1,12 +1,5 @@
 #' The main funtion in order to retrieve the data from the iffi
 
-#' @import dplyr
-#' @import RODBC
-#' @import tools
-#' @import sf
-#' @import stringr
-
-
 #' @description
 #' Generate a shapefile from a given spatial data-object and attributes as
 #' produced by a query on the iffi database
