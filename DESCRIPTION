@@ -3,7 +3,7 @@ Type: Package
 Title: Bring the iffi-data to R
 Version: 0.1.0
 Author: Robin Kohrs
-Maintainer: Robin <yourself@somewhere.net>
+Maintainer: Robin <robin.kohrs@gmx.de>
 Description: The iffitoR-package fascilitates the access to data stored in the iffi-database and related products
     Its main function returns an object of class sf that can then be used for further analysis.
 License: What license is it under?
