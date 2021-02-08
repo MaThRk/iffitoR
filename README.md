@@ -23,8 +23,4 @@ When working under linux one will not be able to use the `RODBC`-functions. Ther
 
 ***
 
-![](data/anim.gif){width=50%}
-
-
-
-
+![](man/figures/anim.gif)
