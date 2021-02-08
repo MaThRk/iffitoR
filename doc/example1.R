@@ -6,47 +6,113 @@ knitr::opts_chunk$set(
 
 ## ----setup, results='hide', message=FALSE, warning=FALSE----------------------
 library(iffitoR)
+library(glue)
 library(RODBC)
+library(forcats)
 library(dplyr)
+library(ggplot2)
 library(tools)
 library(stringr)
 library(sf)
 
 ## -----------------------------------------------------------------------------
 joins = list(
-    "tbl_frane.Geologia.litologia" = c(
-      "diz_frane.diz_litologie.litologia",
-      "diz_frane.diz_litologie.nome_litologia"
-    ),
-    
-    "tbl_frane.clas_ii_liv.movimento" = c(
-      "diz_frane.diz_movimenti.movimento",
-      "diz_frane.diz_movimenti.nome_movimento"
-    ))
+  "tbl_frane.Geologia.litologia" = c(
+    "diz_frane.diz_litologie.litologia",
+    "diz_frane.diz_litologie.nome_litologia"
+  ),
+  
+  "tbl_frane.clas_ii_liv.movimento" = c(
+    "diz_frane.diz_movimenti.movimento",
+    "diz_frane.diz_movimenti.nome_movimento"
+  ),
+  "tbl_frane.Generalita.Cod_tipo" = c(
+    "diz_frane.diz_tipo_movi.cod_tipo",
+    "diz_frane.diz_tipo_movi.tipologia"
+  )
+)
+
+## ----paths--------------------------------------------------------------------
+# I use the path to the databsaes on the Eurac Network (am I connected to the VPN?)
+
+# the path to the iffi polygons
+landslide_poly_path = "\\\\projectdata.eurac.edu/projects/Proslide/Landslides/Iffi_db_xxxx_to_2018/exportperEurac2020/Shapefiles/IFFI10_5.shp"
+
+# the path to the iffi points
+landslide_point_path = "\\\\projectdata.eurac.edu/projects/Proslide/Landslides/Iffi_db_xxxx_to_2018/exportperEurac2020/Shapefiles/IFFI10_1.shp" 
+
+# the path to the folder with the iffi-databases 
+database_dir = "\\\\projectdata.eurac.edu/projects/Proslide/Landslides/Iffi_db_xxxx_to_2018/exportperEurac2020/database" 
 
 ## -----------------------------------------------------------------------------
+# we only want the dates from the attributes tables
+attri = c("anno_min",
+          "mese_min",
+          "giorno_min")
 
-# Not run
+## ----getdata, warning=F, message=F, cache=TRUE--------------------------------
+iffi_sf = iffitoR::make_shapefile(database_dir=database_dir,
+                                  attribute_database_name = "tbl_frane",
+                                  dictionary_database_name = "diz_frane",
+                                  shapefile = landslide_point_path,
+                                  attri = attri,
+                                  joins=joins)
 
-#res_sf = make_shapefile(database_dir = "vignettes/data/",
-#                       attribute_database_name = "test",
-#                       dictionary_database_name = "dic_db",
-#                       shape = "vignettes/data/IFFI10_1.shp",
-#                       attri=c("anno_min", "mese_min"))
+## -----------------------------------------------------------------------------
+dplyr::glimpse(iffi_sf)
 
-## ---- fig.width=8, fig.height=8-----------------------------------------------
+## ----translate----------------------------------------------------------------
 
-# Not run
+iffi_eng = iffitoR::translate_iffi(iffi_sf)
+iffi_eng %>% select(c(first_level, second_level)) %>% head()
 
-#library(ggplot2)
-#res_sf = res_sf %>% filter(anno_min > 2000)
-#
-#res_gg = ggplot(res_sf) +
-#  geom_sf(aes(color=anno_min)) +
-#  scale_color_continuous(low="white", high="darkgreen", na.value="grey", name="year")
-#
-#res_gg
+## ----getdate------------------------------------------------------------------
+iffi_date = iffitoR::get_date_information(iffi_eng)
+iffi_date %>% select(matches("date|year|month|day")) %>% glimpse()
 
-## ---- echo=F, fig.align='center', out.width="80%", out.height="80%"-----------
-knitr::include_graphics("map1.png")
+## -----------------------------------------------------------------------------
+iffi_sf_poly = iffitoR::make_shapefile(database_dir=database_dir,
+                                  attribute_database_name = "tbl_frane",
+                                  dictionary_database_name = "diz_frane",
+                                  shapefile = landslide_poly_path,
+                                  attri = attri,
+                                  joins=joins)
+
+## ----polydimension------------------------------------------------------------
+dim(iffi_sf_poly)
+
+## ----translatepoly------------------------------------------------------------
+#trasnlate
+iffi_sf_poly = iffitoR::translate_iffi(iffi_sf_poly)
+
+# get date information
+iffi_sf_poly = iffitoR::get_date_information(iffi_sf_poly)
+
+## ---- fig.width=8-------------------------------------------------------------
+iffi_sf_poly %>% 
+  count(second_level, sort=T) %>% 
+  mutate(second_level = glue("{second_level} ({n})")) %>% 
+  mutate(second_level = fct_reorder(second_level, n)) %>% 
+  ggplot(aes(x=n, y=second_level)) +
+  geom_col()  +
+  labs(title="Distribution of polygons in the iffi database",
+       x = "# of events",
+       y = "") +
+  theme_light()
+
+## ----whenslides, fig.width=10-------------------------------------------------
+
+iffi_sf_poly %>% 
+  filter(year.int >= 1990) %>% 
+  filter(str_detect(second_level, "transla|rota")) %>% 
+  ggplot(aes(x=date, fill=second_level)) +
+  geom_histogram(position="dodge", bindwidth=30) +
+  scale_x_date(date_breaks = "1 year") +
+  theme_light() +
+  labs(x="", y="Number of Events", title="When did the slides happen?",
+       fill="") +
+  theme(
+    axis.text.x = element_text(angle=90)
+  )
+
 
