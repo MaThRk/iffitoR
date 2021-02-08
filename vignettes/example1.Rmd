@@ -31,7 +31,6 @@ As the format of the iffi-database is likely to change at some point in the near
 
 ```{r setup, results='hide', message=FALSE, warning=FALSE}
 library(iffitoR)
-library(plotly)
 library(glue)
 library(RODBC)
 library(forcats)

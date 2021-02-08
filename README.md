@@ -1,8 +1,10 @@
 # A little collection of funtions to get data from the tables exported from the iffi-database
 
-The package (and the vignettes) can be installed with:
+The package (without the vignettes) can be installed with:
 
-`remotes::install_github("https://github.com/RobinKohrs/iffitoR", build_vignettes=TRUE)`
+`remotes::install_github("https://github.com/RobinKohrs/iffitoR")`
+
+The problem with the vignettes is, that 
 
 ## A simple vignette with some descriptions
 
