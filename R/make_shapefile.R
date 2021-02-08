@@ -47,8 +47,8 @@
 #'}
 
 make_shapefile = function(database_dir=NULL,
-                          attribute_database_name=NULL,
-                          dictionary_database_name=NULL,
+                          attribute_database_name="tbl_frane",
+                          dictionary_database_name="diz_frane",
                           shapefile=NULL,
                           attri=NULL,
                           joins=NULL) {
