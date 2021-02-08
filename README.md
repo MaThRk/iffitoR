@@ -15,7 +15,7 @@ There is some problem with building the vignettes locally with `devtools`. A sol
 3. Install it
   `R CMD INSTALL iffitoR`
 
-When working under linux one will not be able to use the `RODBC`-functions. There is not solution at the moment is to use the data with 
+When working under linux one will not be able to use the `RODBC`-functions. There is not solution at the moment is to use the data that comes with the package and do not build the vignettes.
 
 ## A simple vignette with some descriptions
 
