@@ -23,7 +23,7 @@ When working under linux one will not be able to use the `RODBC`-functions. Ther
 
 ***
 
-![](inst/anim.gif){width=50%}
+![](data/anim.gif){width=50%}
 
 
 
