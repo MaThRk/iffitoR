@@ -1,16 +1,10 @@
 base
-methods
-datasets
-utils
-grDevices
-graphics
-stats
 RODBC
 iffitoR
 glue
 forcats
 dplyr
 ggplot2
-tools
 stringr
 sf
+plotly

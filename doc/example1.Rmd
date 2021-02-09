@@ -1,5 +1,5 @@
 ---
-title: "Example retrieve"
+title: "Example retrieve from iffi-db"
 output: 
   rmarkdown::html_vignette:
     toc: true
@@ -31,6 +31,7 @@ As the format of the iffi-database is likely to change at some point in the near
 
 ```{r setup, results='hide', message=FALSE, warning=FALSE}
 library(iffitoR)
+library(plotly)
 library(glue)
 library(RODBC)
 library(forcats)
@@ -111,18 +112,29 @@ attri = c("anno_min",
 - now we can call the function
 
 ```{r getdata, warning=F, message=F, cache=TRUE}
-iffi_sf = iffitoR::make_shapefile(database_dir=database_dir,
-                                  attribute_database_name = "tbl_frane",
-                                  dictionary_database_name = "diz_frane",
-                                  shapefile = landslide_point_path,
-                                  attri = attri,
-                                  joins=joins)
+# this only works under windows
+os = Sys.info()["sysname"]
+
+if (os == "Windows") {
+  iffi_sf = iffitoR::make_shapefile(
+    database_dir = database_dir,
+    attribute_database_name = "tbl_frane",
+    dictionary_database_name = "diz_frane",
+    shapefile = landslide_point_path,
+    attri = attri,
+    joins = joins
+  )
+  
+}else{
+  iffi_sf = landsld
+}
 ```
 # Inspect the results
 
 ```{r}
 dplyr::glimpse(iffi_sf)
 ```
+
 ## Translate the results
 
 - AS a first distinction events in the iffi-databse are classified according to two levels. The first level being a more coarse classification, and the second one a more detailed one
@@ -134,9 +146,11 @@ dplyr::glimpse(iffi_sf)
 - This function will fail, if the columns `tipologia` and `nome_movimento` are not queried in the joins
 
 ```{r translate}
-
-iffi_eng = iffitoR::translate_iffi(iffi_sf)
-iffi_eng %>% select(c(first_level, second_level)) %>% head()
+# if we are not working with the data from the package we still need to preprocess it a little bit
+if(os == "Windows"){
+  iffi_eng = iffitoR::translate_iffi(iffi_sf)
+  iffi_eng %>% select(c(first_level, second_level)) %>% head()
+}
 ```
 
 ## Get more time information
@@ -146,36 +160,41 @@ iffi_eng %>% select(c(first_level, second_level)) %>% head()
 - This creates the three integer columns `year.int`, `month.int` and `day.int`. In addition in creates two columns of class `date`. One beeing the exact date the other one the 1st of January of the year of the movement.
 
 ```{r getdate}
-iffi_date = iffitoR::get_date_information(iffi_eng)
-iffi_date %>% select(matches("date|year|month|day")) %>% glimpse()
+# same for the time information that is alrady in the data from the package
+if(os=="Windows"){
+  iffi_date = iffitoR::get_date_information(iffi_eng)
+  iffi_date %>% select(matches("date|year|month|day")) %>% glimpse()
+}
 ```
 
 # Get the information about the Polygons
 
 ```{r}
+if(os=="Windows"){
 iffi_sf_poly = iffitoR::make_shapefile(database_dir=database_dir,
                                   attribute_database_name = "tbl_frane",
                                   dictionary_database_name = "diz_frane",
                                   shapefile = landslide_poly_path,
                                   attri = attri,
                                   joins=joins)
-```
-## filtering?
+}
 
-- There are 1908 polygons in the iffi database
-
-```{r polydimension}
+# how many polygons do we have?
 dim(iffi_sf_poly)
 ```
 
-- translate to englisch and get the date information as above.
+## filtering?
+
+- translate to english and get the date information as above.
 
 ```{r translatepoly}
+if(os=="Windows"){
 #trasnlate
 iffi_sf_poly = iffitoR::translate_iffi(iffi_sf_poly)
 
 # get date information
 iffi_sf_poly = iffitoR::get_date_information(iffi_sf_poly)
+}
 ```
 
 ## what have we got?
@@ -183,6 +202,7 @@ iffi_sf_poly = iffitoR::get_date_information(iffi_sf_poly)
 - lets plot the distribution of different type
 
 ```{r, fig.width=8}
+if(os=="Windows"){
 iffi_sf_poly %>% 
   count(second_level, sort=T) %>% 
   mutate(second_level = glue("{second_level} ({n})")) %>% 
@@ -190,15 +210,17 @@ iffi_sf_poly %>%
   ggplot(aes(x=n, y=second_level)) +
   geom_col()  +
   labs(title="Distribution of polygons in the iffi database",
+       subtitle = "in the second-level classification",
        x = "# of events",
        y = "") +
   theme_light()
+}
 ```
 
 # when did the slides happen?
 
 ```{r whenslides, fig.width=10}
-
+if(os=="Windows"){
 iffi_sf_poly %>% 
   filter(year.int >= 1990) %>% 
   filter(str_detect(second_level, "transla|rota")) %>% 
@@ -211,6 +233,40 @@ iffi_sf_poly %>%
   theme(
     axis.text.x = element_text(angle=90)
   )
+}
+```
 
+
+# Plot the Points
+
+- we use the data from the package so that this runs under Linus as well
+
+```{r plotpoints, fig.width=8}
+landsld %>% 
+  # filter(year.int > 1980) %>% 
+  count(second_level, sort = TRUE) %>% 
+  mutate(second_level = glue("{second_level} ({n})")) %>% 
+  mutate(second_level = fct_reorder(second_level, n)) %>% 
+  ggplot() +
+  geom_col(aes(x = n, y=second_level)) +
+  labs(title="Distribution of points in the iffi database",
+       subtitle = "in the second-level classification",
+       x = "# of events",
+       y = "") +
+  theme_light()
+```
+
+- now plot the time of occurence with plotly
+
+```{r timepoints, fig.width=8}
+landsld %>% 
+  filter(str_detect(second_level, "rotational|translational")) %>% 
+  filter(date_info != "no date") %>% 
+  group_by(year.int) %>% 
+  mutate(n = sum(year.int)) %>% 
+  plot_ly(., x = ~year.int,  type="histogram", color=~second_level) %>% 
+  layout(title="Distriubtion of rotational and translational slides", 
+         xaxis = list("year", zeroline=T), 
+         yaxis = list("# of events"))
 ```
 

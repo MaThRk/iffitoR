@@ -1,0 +1,112 @@
+title: "Maximum slides per week"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{maxslidesperweek}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# In which Week happended the most slides
+
+- Use the iffi-data to find out in which week the most events happened
+
+- We use the data that already comes with the `iffitoR`-package
+
+- first we load the packages
+
+```{r setup, message=F, warning=F}
+library(iffitoR)
+library(lubridate)
+library(stringr)
+library(leaflet.extras)
+library(sf)
+library(leaflet)
+library(dplyr)
+library(ggplot2)
+library(glue)
+library(forcats)
+```
+
+- now we load the iffi-data (it is actually already loaded)
+
+```{r}
+data_iffi = landsld
+glimpse(data_iffi)
+```
+- the data that comes with the package is already pre-processed. Meaning it has the classification-columns in english and some computed day-columns
+
+# Max Slides per Day 
+
+- We yet dont have the data agggregated per week, so lets have a look which day was the day with the most slides
+
+```{r}
+data_iffi %>% 
+  filter(str_detect(second_level, "translational")) %>% 
+  count(date, sort=T)
+```
+- On the 21st June of 2007 9 slides happened which is the max number of slides 
+
+
+## Visualize the max slides per day
+
+```{r maxdayviz, fig.width=7, fig.height=7}
+dat = data_iffi %>% 
+  filter(date == as.Date("2007-06-21")) %>% 
+  st_transform(4326)
+
+
+# the color palette for the categorical data 
+cf = colorFactor(palette = "RdYlBu", domain=dat$second_level)
+sl = unique(dat$second_level)
+
+map = leaflet(dat) %>%
+  addProviderTiles(providers$Stamen.TonerLite) 
+
+for (g in sl) {
+  d = dat %>% filter(second_level == g)
+  map = map %>% addCircles(
+    data = d,
+    popup = paste0("date: ", d$date, "<br>", "type:", d$second_level),
+    color =  ~ cf(d$second_level),
+    group = g
+  )
+}
+
+map %>% addLayersControl(overlayGroups = sl) 
+
+```
+
+***
+
+# Aggregate per week
+
+```{r}
+data_iffi %>% 
+  filter(date_info == "day") %>% 
+  filter(str_detect(second_level, "translational")) %>% 
+  mutate(week = paste0(year.int, formatC(week(date), flag=0, width=2))) %>% 
+  count(week, sort=T) %>% 
+  mutate(first_day_of_week = as.Date(paste0(week, 1), "%Y%U%u")) %>% 
+  mutate(week = glue("{week}  ({n})")) %>% 
+  mutate(week = fct_reorder(week, n)) %>% 
+  mutate(ishighlight = ifelse(n == 9, TRUE, FALSE)) %>% 
+  head(n = 12) %>% 
+  ggplot() +
+  geom_col(aes(x=n, y=week, fill=ishighlight)) +
+  scale_fill_manual(values = c("grey", "darkred"), guide=F) +
+  theme_light() +
+  labs(x = "# of events per week",
+       y = "Week",
+       title = "Weeks with highest number of Slides")
+```
+
