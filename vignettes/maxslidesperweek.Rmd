@@ -1,3 +1,4 @@
+---
 title: "Maximum slides per week"
 output: 
   rmarkdown::html_vignette:

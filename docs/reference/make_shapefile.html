@@ -96,10 +96,13 @@ produced by a query on the iffi database" />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/example1.html">Example retrieve</a>
+      <a href="../articles/example1.html">Example retrieve from iffi-db</a>
     </li>
     <li>
       <a href="../articles/joins.html">example joins</a>
+    </li>
+    <li>
+      <a href="../articles/maxslidesperweek.html">Maximum slides per week</a>
     </li>
   </ul>
 </li>
@@ -131,8 +134,8 @@ produced by a query on the iffi database</p>
 
     <pre class="usage"><span class='fu'>make_shapefile</span><span class='op'>(</span>
   database_dir <span class='op'>=</span> <span class='cn'>NULL</span>,
-  attribute_database_name <span class='op'>=</span> <span class='cn'>NULL</span>,
-  dictionary_database_name <span class='op'>=</span> <span class='cn'>NULL</span>,
+  attribute_database_name <span class='op'>=</span> <span class='st'>"tbl_frane"</span>,
+  dictionary_database_name <span class='op'>=</span> <span class='st'>"diz_frane"</span>,
   shapefile <span class='op'>=</span> <span class='cn'>NULL</span>,
   attri <span class='op'>=</span> <span class='cn'>NULL</span>,
   joins <span class='op'>=</span> <span class='cn'>NULL</span>
