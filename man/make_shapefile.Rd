@@ -20,7 +20,7 @@ make_shapefile(
 
 \item{dictionary_database_name}{Name without extension of the dictionary database}
 
-\item{shapefile}{A shape that cointains the iffi_kodex in a column called PIFF_ID}
+\item{shapefile}{A shape that contains the iffi_kodex in a column called PIFF_ID}
 
 \item{attri}{A vector of attributes to query directly from the attributes database}
 

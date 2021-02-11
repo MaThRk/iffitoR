@@ -9,7 +9,7 @@
 #' @param database_dir Path to the directory of the databases
 #' @param attribute_database_name Name without extension of the attributes database
 #' @param dictionary_database_name Name without extension of the dictionary database
-#' @param shapefile A shape that cointains the iffi_kodex in a column called PIFF_ID
+#' @param shapefile A shape that contains the iffi_kodex in a column called PIFF_ID
 #' @param attri A vector of attributes to query directly from the attributes database
 #' @param join A named list of the tables that need to be joined in order to get the desciptions from the dictionary
 #' @export

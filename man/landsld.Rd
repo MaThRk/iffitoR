@@ -13,10 +13,4 @@ data(landsld)
 \description{
 Example landslide data from the iffi database
 }
-\examples{
-data(lndsld)
-dim(lndsld)
-
-
-}
 \keyword{dataset}

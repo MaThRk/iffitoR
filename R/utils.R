@@ -75,7 +75,7 @@ select_database = function(conns, database) {
 }
 
 #' return a list of table names for a list of db connection
-
+#' @export
 make_list_tables = function(conns) {
   # declare names list to store the names
   table_names_list = vector("list", length = length(conns))
