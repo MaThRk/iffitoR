@@ -6,7 +6,6 @@
 #' @importFrom  sf st_transform st_read
 #' @importFrom  stringr str_split str_replace
 #' @importFrom  GADMTools gadm_sf_loadCountries
-#' @importFrom magrittr "%>%"
 
 #' @export
 #' @param database_dir The directory where all the databases are
