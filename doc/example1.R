@@ -156,11 +156,7 @@ landsld %>%
 ## ----timepoints, fig.width=8--------------------------------------------------
 landsld %>% 
   filter(str_detect(second_level, "rotational|translational")) %>% 
-  filter(date_info != "no date") %>% 
-  group_by(year.int) %>% 
-  mutate(n = sum(year.int)) %>% 
-  plot_ly(., x = ~year.int,  type="histogram", color=~second_level) %>% 
-  layout(title="Distriubtion of rotational and translational slides", 
-         xaxis = list("year", zeroline=T), 
-         yaxis = list("# of events"))
+  filter(date_info != "no date") %>% st_drop_geometry() %>% 
+  plot_ly(data = ., x = ~year.posix, color=~second_level) %>% 
+  layout(title="Distriubtion of rotational and translational slides", legend=list(x=0.3, orientation="h", y=-0.2), xaxis = list(title="Year"), yaxis=list(title="# of slides"))
 
