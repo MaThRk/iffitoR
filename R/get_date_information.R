@@ -19,7 +19,7 @@
 #' @export
 get_date_information = function(df) {
 
-  res = res %>%
+  df = df %>%
     mutate(
       year_present = if_else(!is.na(anno_min), true = TRUE, false = FALSE),
       month_present = if_else(!is.na(mese_min), true = TRUE, false = FALSE),
@@ -27,7 +27,7 @@ get_date_information = function(df) {
     )
 
 
-  res = res %>%
+  df = df %>%
     mutate(date_info = if_else(
       day_present,
       true = "day",
@@ -39,7 +39,7 @@ get_date_information = function(df) {
       )))
 
 
-  res = res %>% mutate(date = paste(anno_min, mese_min, giorno_min, sep = "/")) %>%
+  df = df %>% mutate(date = paste(anno_min, mese_min, giorno_min, sep = "/")) %>%
     mutate(date = as.Date(date),
            year.int = anno_min, # year as int
            month.int = mese_min,
@@ -48,7 +48,7 @@ get_date_information = function(df) {
            year.posix = as.Date(paste0(anno_min, "-01-01")))
 
   # remove the italian time information
-  res = res %>%
+  df = df %>%
     select(-c(anno_min, mese_min, giorno_min))
 
   cat("\nAdded the columns:\n\n date_info (chr) - (eiher 'year', 'month', 'day' or 'no date')\n year.int (integer)
@@ -58,6 +58,6 @@ get_date_information = function(df) {
  day.int (integer of the day in the month)
  year.posix (date) (object of class date, referenced to the 1st of January of the year)\n\n")
 
-  return(res)
+  return(df)
 
 }
