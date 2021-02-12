@@ -1,5 +1,7 @@
 #' function to information about the dates and the temporal information of landslides
 #'
+#' @importFrom lubridate yday
+#'
 #' @param df object as returned from \code{iffitoR::make_shapefile}
 #'
 #' @return a spatial dataframe of class \code{sf}
@@ -15,7 +17,7 @@
 #' }
 #'
 #' @export
-get_date_information = function(res) {
+get_date_information = function(df) {
 
   res = res %>%
     mutate(
@@ -42,6 +44,7 @@ get_date_information = function(res) {
            year.int = anno_min, # year as int
            month.int = mese_min,
            day.int = giorno_min,
+           doy = lubridate::yday(date),
            year.posix = as.Date(paste0(anno_min, "-01-01")))
 
   # remove the italian time information
@@ -49,8 +52,10 @@ get_date_information = function(res) {
     select(-c(anno_min, mese_min, giorno_min))
 
   cat("\nAdded the columns:\n\n date_info (chr) - (eiher 'year', 'month', 'day' or 'no date')\n year.int (integer)
- month.int (integer)
- day.int (integer)
+ date (the day as date-object)
+ doy (numeric day of the year)
+ month.int (integer of the month)
+ day.int (integer of the day in the month)
  year.posix (date) (object of class date, referenced to the 1st of January of the year)\n\n")
 
   return(res)

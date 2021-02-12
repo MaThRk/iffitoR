@@ -4,7 +4,7 @@
 \alias{get_date_information}
 \title{function to information about the dates and the temporal information of landslides}
 \usage{
-get_date_information(res)
+get_date_information(df)
 }
 \arguments{
 \item{df}{object as returned from \code{iffitoR::make_shapefile}}
