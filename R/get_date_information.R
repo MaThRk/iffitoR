@@ -43,6 +43,7 @@ get_date_information = function(df) {
     mutate(date = as.Date(date),
            year.int = anno_min, # year as int
            month.int = mese_min,
+           week = as.integer(paste0(year.int, formatC(lubridate::week(date), flag=0, width=2))),
            day.int = giorno_min,
            doy = lubridate::yday(date),
            year.posix = as.Date(paste0(anno_min, "-01-01")))
@@ -55,6 +56,7 @@ get_date_information = function(df) {
  date (the day as date-object)
  doy (numeric day of the year)
  month.int (integer of the month)
+ week (yyyyww e.g. 200201 for the first week in 2002)
  day.int (integer of the day in the month)
  year.posix (date) (object of class date, referenced to the 1st of January of the year)\n\n")
 
