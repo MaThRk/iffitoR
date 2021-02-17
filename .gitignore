@@ -4,6 +4,7 @@ Meta
 local_tests*
 doc
 local_data*
+notes/
 data_raw*
 .Rproj.user*
 .Rproj.user
