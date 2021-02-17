@@ -356,7 +356,7 @@ join_descriptions = function(joins, dfs_attr_iffi, dfs_dict){
 
     #------------
 
-    # get the database, Table, column of the attribute datbase
+    # get the database, Table, column of the dictionary datbase
     table_dict = joins[[i]] %>% stringr::str_split(., pattern = "\\.") %>% .[[1]] %>% .[[2]]
 
     cols_dict = sapply(joins[[i]], function(x) split_and_return(x), USE.NAMES = F)
