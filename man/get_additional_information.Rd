@@ -5,8 +5,7 @@
 \title{Get more information from the LPM DATA}
 \usage{
 get_additional_information(
- 
-    path_IFFI10 = "\\\\\\\\projectdata.eurac.edu/projects/Proslide/Landslides/Iffi_db_xxxx_to_2018/exportperEurac2020/Shapefiles/IFFI10_1.shp",
+  iffi10 = NULL,
  
     path_LPM_shape = "\\\\\\\\projectdata.eurac.edu/projects/Proslide/Landslides/Iffi_db_xxxx_to_2018/exportperEurac2020/Shapefiles/LPM_Akten.shp",
  
@@ -15,11 +14,13 @@ get_additional_information(
 )
 }
 \arguments{
-\item{path_IFFI10}{Path to the IFFI10 shapefile}
-
 \item{path_LPM_shape}{Path to the LPM shapefile}
 
 \item{keep_lpm}{Vector of columns from the lpm shapefile that we want to keep}
+
+\item{path_IFFI10}{Path to the IFFI10 shapefile}
+
+\item{dsdf}{}
 }
 \value{
 an object of type \code{sf}

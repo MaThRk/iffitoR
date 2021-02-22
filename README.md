@@ -2,7 +2,23 @@
 
 The package (without the vignettes) can be installed with:
 
+**INSTALL FROM GITHUB**
+
 `remotes::install_github("https://github.com/RobinKohrs/iffitoR")`
+
+**INSTALL FROM GITLAB**
+
+```r
+# the paths to the public and private ssh-key
+pubic = "C://PATH/TO/PUBLIC/id_rsa.pub",
+private = "C://PATH/TO/PRIVATE/id_rsa"
+
+# install it using devtools
+devtools::install_git("git@gitlab.inf.unibz.it:proslide/iffitor.git",
+                      credentials = creds)
+```
+
+**BUILD THE PACKAGE LOCALLY**
 
 In order to get the vignettes locally you can build the package yourself by:
 

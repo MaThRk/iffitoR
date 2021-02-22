@@ -14,21 +14,22 @@
 #' @param path_IFFI10 Path to the IFFI10 shapefile
 #' @param path_LPM_shape Path to the LPM shapefile
 #' @param keep_lpm Vector of columns from the lpm shapefile that we want to keep
+#' @param dsdf
 #'
 #' @export
 
-get_additional_information = function(path_IFFI10 = "\\\\projectdata.eurac.edu/projects/Proslide/Landslides/Iffi_db_xxxx_to_2018/exportperEurac2020/Shapefiles/IFFI10_1.shp",
+get_additional_information = function(iffi10 = NULL,
                                       path_LPM_shape = "\\\\projectdata.eurac.edu/projects/Proslide/Landslides/Iffi_db_xxxx_to_2018/exportperEurac2020/Shapefiles/LPM_Akten.shp",
                                       path_stato = "\\\\projectdata.eurac.edu/projects/Proslide/Landslides/Iffi_db_xxxx_to_2018/exportperEurac2020/database/Stato delle conoscenze.xls",
                                       keep_lpm = c("ACCGE_IDEN", "GEOKAT_ID", "OGGETTO")) {
   # verify that there actually are some paths
-  stopifnot("The path to the IFFI10-shapefile does not result in a file..." = file.exists(path_IFFI10))
+  # stopifnot("The path to the IFFI10-shapefile does not result in a file..." = file.exists(path_IFFI10))
   stopifnot("The path to the LPM-shapefile does not result in a file..." = file.exists(path_LPM_shape))
   stopifnot("The path to the Stato delle conoscenze does not result in a file..." = file.exists(path_stato))
 
 
   # read in the data
-  iffi10 = read_sf(path_IFFI10)
+  # iffi10 = read_sf(path_IFFI10)
   lpm_shape = read_sf(path_LPM_shape)
   stato = read_excel(path_stato, range = cell_cols("B:F"))
 
@@ -40,8 +41,6 @@ get_additional_information = function(path_IFFI10 = "\\\\projectdata.eurac.edu/p
     message("Reprojecting the lpm-shapefile to the iffi shape")
     lpm_shape = st_transform(lpm_shape, crs_iffi)
   }
-
-  #
 
   # calculate the iffi kodex in the stato excel -----------------------------
   # there are duplicates in the calculated iffi-index --> What to do?
