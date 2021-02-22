@@ -4,15 +4,16 @@
 #' specified in the parameter \code{keep_lm}
 #'
 #'
-#' @importFrom sf read_sf st_drop_geometry()
-#' @imoprtFrom readxl read_excel
-#' @importFrom from tidyr extract
+#' @importFrom sf read_sf st_drop_geometry
+#' @importFrom readxl read_excel cell_cols
+#' @importFrom  tidyr extract
 #' @importFrom dplyr mutate
 #'
 #' @return an object of type \code{sf}
 #'
 #' @param path_IFFI10 Path to the IFFI10 shapefile
 #' @param path_LPM_shape Path to the LPM shapefile
+#' @param keep_lpm Vector of columns from the lpm shapefile that we want to keep
 #'
 #' @export
 
@@ -29,7 +30,7 @@ get_additional_information = function(path_IFFI10 = "\\\\projectdata.eurac.edu/p
   # read in the data
   iffi10 = read_sf(path_IFFI10)
   lpm_shape = read_sf(path_LPM_shape)
-  stato = read_excel(path_stato)
+  stato = read_excel(path_stato, range = cell_cols("B:F"))
 
   # check if they use the same crs
   crs_iffi = st_crs(iffi10)
@@ -48,6 +49,7 @@ get_additional_information = function(path_IFFI10 = "\\\\projectdata.eurac.edu/p
     mutate(iffi = 10000 * GEN_ID + 100 * GEN_SUBID + 00)
 
   # merge the iffi with stato based on the iffi kodex -----------------------
+  # this will add the ACCGE_IDEN (in the NOTE-column) to the shape
   df_iffi = merge(
     iffi10,
     stato,
@@ -58,28 +60,41 @@ get_additional_information = function(path_IFFI10 = "\\\\projectdata.eurac.edu/p
   ) %>%
     dplyr::distinct(PIFF_ID, .keep_all = TRUE)
 
+  # get the geometry
+  geom = df_iffi %>% st_geometry()
+
 
   # get the ACCGE_IDEN from the excel table ---------------------------------
-  df_iffi = df_iffi %>%
+  # why does it produce duplicate geometry columns??
+  df_iffi = df_iffi  %>%
+    st_drop_geometry %>%
     tidyr::extract(
       col = c("NOTE"),
       into = c("ACCGE_IDEN"),
       "(\\d{5})",
-      remove = FALSE
+      remove = TRUE
     )
 
+  # put back the geometry
+  df_iffi$geom = geom
+  df_iffi = st_as_sf(df_iffi)
+
+  # # remove duplicate geometry column
+  # index_geometries = names(df_iffi) %>% grep("geom", .)
+  # if(index_geometries > 1){
+  #   remove_indexes = index_gemetries[2:length(index_geometries)]
+  # }
+  # # set all the geometry columns minus the first one to null
+  # df_iffi[,remove_indexes] = NULL
+
+
   # remove the spatial information from the lpm_shapefile -------------------
+  # For us the spatial information from the iffi10-shape is more useful
   lpm_no_shape = lpm_shape %>% st_drop_geometry() %>% .[, keep_lpm]
 
-
-
   # join the lpm_no_shape_information to the iffi ---------------------------
-  all_joined = merge(lpm_no_shape, df_iffi, by = "ACCGE_IDEN") %>% st_as_sf()
-
+  all_joined = merge(df_iffi, lpm_no_shape, by = "ACCGE_IDEN", all.x=TRUE) %>% st_as_sf()
 
   # return the joined shapefile
   return(all_joined)
-
-
-
 }

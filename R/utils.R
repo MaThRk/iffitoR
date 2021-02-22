@@ -97,6 +97,7 @@ make_list_tables = function(conns) {
 }
 
 
+#' Creates a vector of table names from a RODBC connection
 #' @return  A single vector of table names for a single db connection
 #' @export
 #' @param db_conn A object if type RODBC
