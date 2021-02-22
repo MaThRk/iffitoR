@@ -1,4 +1,4 @@
-# A collection of functions to get and work with the data from the iffi-database in R 
+# A collection of functions to work with the data from the iffi-database in R 
 
 The package (without the vignettes) can be installed with:
 
@@ -22,14 +22,22 @@ devtools::install_git("git@gitlab.inf.unibz.it:proslide/iffitor.git",
 
 In order to get the vignettes locally you can build the package yourself by:
 
-1. Cloning this repo
-  `git clone "https://github.com/RobinKohrs/iffitoR"`
+1. Clone the repo with:
+
+    *  `git clone "https://github.com/RobinKohrs/iffitoR"`
+  
+  
+    *  `git clone git@gitlab.inf.unibz.it:proslide/iffitor.git`
 
 2. Build the package locally
-  `R CMD build iffitoR`
+
+    * `R CMD build iffitoR`
   
 3. Install it
-  `R CMD INSTALL iffitoR`
+
+    * `R CMD INSTALL iffitoR`
+    
+****
 
 When working under linux one will not be able to use the `RODBC`-functions in order to access the `.mdb`-databases. The "solution" at the moment is to use the data that comes with the package (`landsld`) and to not build the vignettes. This data already comes with some important information about the lanslides. For querying additional information one needs access to the databases.
 
