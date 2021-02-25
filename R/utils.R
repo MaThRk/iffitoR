@@ -52,11 +52,15 @@ set_connection = function(database_dir) {
 ##----------------------------------------------------------------
 
 read_shape = function(shapefile) {
+
+ if(!is.character(shapefile)) {
+    stop(call. = FALSE, "The shapefile-argument must be passed a character-path")
+ }
+
   # make sure it's a valid path
   if (!file.exists(shapefile)) {
     stop(call. = FALSE, "the shape does not exist")
   }
-
 
   # connect to shape
   shape = st_read(shapefile)
