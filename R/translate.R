@@ -1,4 +1,7 @@
-#' function to translate some of the column to english
+#' function to translate some of the column to English
+#'
+#' @importFrom dplyr rename
+#'
 #'
 #' @export
 #'
@@ -47,12 +50,18 @@ translate_iffi = function(df) {
       tipologia = str_replace(tipologia, pattern = "Aree soggette a sprofondamenti diffusi", replacement = "area subject to subsidence")
     ) %>%
 
-    # rename the actual variables
     mutate(
-      first_level = tipologia,
-      second_level = nome_movimento
-    )
+      nome_materiale = str_replace(nome_materiale, "roccia", "rock"),
+      nome_materiale = str_replace(nome_materiale, "detrito", "debris"),
+      nome_materiale = str_replace(nome_materiale, "terra", "earth"),
+    ) %>%
 
+    # rename the actual variables
+    rename(
+      first_level = tipologia,
+      second_level = nome_movimento,
+      material = nome_materiale
+    )
 
   return(df)
 

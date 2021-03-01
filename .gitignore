@@ -8,3 +8,5 @@ notes/
 data_raw*
 .Rproj.user*
 .Rproj.user
+*.rds
+
