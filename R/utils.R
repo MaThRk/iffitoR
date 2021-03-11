@@ -432,8 +432,8 @@ select_cols = function(df, attri, joins){
 }
 
 #' @export
-get_shape_southtyrol = function(){
-  italy = gadm_sf_loadCountries("ITA", level=3)$sf %>% st_transform(st_crs(25832))
+get_shape_southtyrol = function(level=3){
+  italy = gadm_sf_loadCountries("ITA", level=level)$sf %>% st_transform(st_crs(25832))
   south_tyrol = italy %>% filter(grepl("Bolzano", NAME_2))
   return(south_tyrol)
 }
