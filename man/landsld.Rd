@@ -3,7 +3,7 @@
 \docType{data}
 \name{landsld}
 \alias{landsld}
-\title{Example landslide data from the iffi database}
+\title{Dataset with 8919 slides from South Tyrol and some additional informations}
 \format{
 An object of class \code{"sf"}
 }
@@ -11,6 +11,6 @@ An object of class \code{"sf"}
 data(landsld)
 }
 \description{
-Example landslide data from the iffi database
+Dataset with 8919 slides from South Tyrol and some additional informations
 }
 \keyword{dataset}

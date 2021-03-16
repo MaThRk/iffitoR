@@ -1,4 +1,4 @@
-#' Example landslide data from the iffi database with italian column-names
+#' Example landslide data from the iffi database with italian column-names (EPSG: 32632)
 #'
 #' @docType data
 #'

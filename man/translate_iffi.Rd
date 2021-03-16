@@ -2,10 +2,10 @@
 % Please edit documentation in R/translate.R
 \name{translate_iffi}
 \alias{translate_iffi}
-\title{function to translate some of the column to english}
+\title{function to translate some of the column to English}
 \usage{
 translate_iffi(df)
 }
 \description{
-function to translate some of the column to english
+function to translate some of the column to English
 }

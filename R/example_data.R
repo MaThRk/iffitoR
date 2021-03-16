@@ -1,4 +1,4 @@
-#' Example landslide data from the iffi database
+#' Dataset with 8919 slides from South Tyrol and some additional informations (EPSG: 32362)
 #'
 #' @docType data
 #'
