@@ -343,10 +343,14 @@ join_descriptions = function(joins, dfs_attr_iffi, dfs_dict){
   # list of joined tables
   joined_tables = vector("list")
 
+  # make them all lower case
+  joins = lapply(joins, tolower)
+  names(joins) = tolower(names(joins))
+
   for (i in seq_along(joins)) {
 
     # make a vector of the three
-    elements_in_join = c(names(joins)[[i]], joins[[i]][[1]], joins[[i]][[2]])
+    elements_in_join = c(names(joins)[[i]], joins[[i]][[1]], joins[[i]][[2]]) %>% tolower(.)
 
     # assert that all have 3 entries (db, table, col)
     length_attri = elements_in_join[[1]] %>% stringr::str_split(., pattern = "\\.") %>% unlist() %>% length()
@@ -370,6 +374,9 @@ join_descriptions = function(joins, dfs_attr_iffi, dfs_dict){
 
     # find the attribute table
     df_index = grep(pattern = paste0("^", table_attri, "$"), names(dfs_attr_iffi))
+    if(length(df_index) == 0){
+      stop(paste0("The attribute table ", table_attri," specified in the joins list does not have a corresponding table in the database..."))
+    }
     # select the column to join and the iffi kodex
     df = dfs_attr_iffi[[df_index]] %>% select(c(col_attri, "iffi_kodex"))
 
