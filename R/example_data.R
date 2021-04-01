@@ -1,4 +1,4 @@
-#' Dataset with 8919 slides from South Tyrol and some additional informations (EPSG: 32362)
+#' Dataset with 10482 slides from South Tyrol and some additional informations (EPSG: 32362)
 #'
 #' @docType data
 #'
