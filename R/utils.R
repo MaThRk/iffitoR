@@ -147,16 +147,20 @@ write_csvs = function(table_names, database_dir) {
 #' turn a database connection into a list of dbs
 #' @export
 make_list_dataframes = function(db_conn) {
+
   # get all the tables
   tables_names = make_vector_table_names(db_conn)
+  tables_names = tolower(tables_names)
 
   # make a list of dfs(tables)
   tables_list = vector("list", length = length(tables_names))
   names(tables_list) = tables_names
 
   for (tbl in seq_along(tables_names)) {
+
     # for every table make a df
-    df = sqlFetch(db_conn, tables_names[tbl])
+    df = sqlFetch(db_conn, tables_names[[tbl]])
+    names(df) = tolower(names(df))
 
     tables_list[[tbl]] = df
   }
@@ -173,14 +177,21 @@ check_id = function(list_of_dfs) {
 
   # check it for each dataframe
   for (df in seq_along(list_of_dfs)) {
-    colnames_df = names(list_of_dfs[[df]])
 
-    if (!"subid" %in% colnames_df || !"id" %in% colnames_df) {
+    colnames_df = names(list_of_dfs[[df]])
+    subid = any(grepl("\\bsubid\\b", colnames_df, ignore.case = TRUE))
+    subid_idx = which(grepl("\\bsubid\\b", colnames_df, ignore.case = TRUE))
+    id = any(grepl("\\bid\\b", colnames_df, ignore.case = TRUE))
+    id_idx = which(grepl("\\bid\\b", colnames_df, ignore.case = TRUE))
+
+    if (! (subid & id)) {
+
       print(paste0(names(list_of_dfs)[[df]], ": does not have the id and subid col"))
       logical_vec[[df]] = FALSE
 
-    } else if (length(list_of_dfs[[df]][["id"]]) < 1 ||
-               length(list_of_dfs[[df]][["subid"]]) < 1) {
+    } else if (length(list_of_dfs[[df]][[id_idx]]) < 1 ||
+               length(list_of_dfs[[df]][[subid_idx]]) < 1) {
+
       print(paste0(names(list_of_dfs)[[df]], ": subid or id colum have length 0"))
       logical_vec[[df]] = FALSE
     }
@@ -198,17 +209,20 @@ check_id = function(list_of_dfs) {
 #' create the index to join it later to the shapefile
 
 create_iffi_index = function(list_of_dfs, log_idx) {
+
   for (df in seq_along(list_of_dfs)) {
     # if the df has those two columns
     if (log_idx[[df]]) {
 
-      id = list_of_dfs[[df]][["id"]] * 10000
-      subid = list_of_dfs[[df]][["subid"]] * 100
+      # get the indices of id and subid
+      colnames_df = names(list_of_dfs[[df]])
+      id_idx = which(grepl("\\bid\\b", colnames_df, ignore.case = TRUE))
+      subid_idx = which(grepl("\\bsubid\\b", colnames_df, ignore.case = TRUE))
+
+      id = list_of_dfs[[df]][[id_idx]] * 10000
+      subid = list_of_dfs[[df]][[subid_idx]] * 100
 
       iffi_kodex = id + subid + 00
-
-      # # create iffi_kodex
-      # iffi_kodex = paste0(id_p_subid)
 
       # add it to the df
       list_of_dfs[[df]][["iffi_kodex"]] = iffi_kodex
@@ -224,7 +238,7 @@ create_iffi_index = function(list_of_dfs, log_idx) {
 
 #' find the necessary tables
 
-find_tables = function(list_of_dfs_with_iffi_kodex, attributes){ # great name...
+find_tables = function(list_of_dfs_with_iffi_kodex, attri){ # great name...
 
   # make a list of all tables-names (names) and the columns (keys)
   tables_names_columns = lapply(list_of_dfs_with_iffi_kodex, names)
@@ -236,13 +250,13 @@ find_tables = function(list_of_dfs_with_iffi_kodex, attributes){ # great name...
   j = 1
 
   # for each attribute
-  for (attr in attributes) {
+  for (attr in attri) {
 
     # for each tables
     for (i in seq_along(tables_names_columns)) {
 
       # if the attribute is in one of the colums of the table
-      if (attr %in% tables_names_columns[[i]] ) {
+      if (any(grepl(attr, tables_names_columns[[i]], ignore.case = TRUE))) {
         print(paste0("The variable: ", attr, " is found in table: ", names(tables_names_columns)[[i]]))
         # it its not yet in the list of tables
         if (! names(tables_names_columns)[[i]] %in% tables) {

@@ -85,6 +85,7 @@ make_shapefile = function(database_dir=NULL,
    dfs_attr = make_list_dataframes(attr_database_conn)
 
 
+
    # make a list of dataframes(tables) for the dictionary database
    if (!is.null(dictionary_database_name)) {
       dfs_dict = make_list_dataframes(dict_database_conn)
