@@ -28,27 +28,28 @@ library(here)
 - connect to all the databases in the folder
 
 ```{r}
-here::here()
-p = here("inst/extdata/")
-connections = iffitoR::set_connection(p)
-```
 
-- what have we got
-
-```{r}
-connections
-```
-
-- now we can convert all the tables in one connection into a list of dataframe, by:
-
-```{r}
-# connect to the dictionary database
-list_of_dfs = iffitoR::make_list_dataframes(connections[[1]])
-
-for (i in seq_along(list_of_dfs)) {
-  print(paste0("Colums-Names in", names(list_of_dfs)[[i]]))
-  print(names(list_of_dfs[[i]]))
-  print("")
+os=Sys.info()["sysname"]
+if(os == "Windows") {
+  here::here()
+  p = here("inst/extdata/")
+  connections = iffitoR::set_connection(p)
+  
+  (connections)
+  
+  # now we can convert all the tables in one connection into a list of dataframe, by:
+  
+  # connect to the dictionary database
+  list_of_dfs = iffitoR::make_list_dataframes(connections[[1]])
+  
+  for (i in seq_along(list_of_dfs)) {
+    print(paste0("Colums-Names in", names(list_of_dfs)[[i]]))
+    print(names(list_of_dfs[[i]]))
+    print("")
+  }
+}else{
+  print("This wont work here...;)")
 }
+
 ```
 
