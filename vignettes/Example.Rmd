@@ -1,0 +1,283 @@
+---
+title: "Example retrieve from the iffi database using the `iffitoR`-minipackage"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{exampleretrieve}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Introduction
+
+The `iffitoR`-package exists to fascilitate the import of data stored in the iffi-database (Inventario dei Fenomeni Franosi in Italia) into R. This includes the calculation of the unique "iffi"-codex in the dabases. The joins within the non-spatial databases and the subsequent join to a shapefile. 
+
+The shapefile as well as the non-spatial data both in the end contain a column that holds the unique identifier for each mass movement. The so called iffi-kodex. Here we give a short introdcution to the package and how to query the data from the databases. 
+
+As the format of the iffi-database is likely to change at some point in the near future, the code here is far from beeing good. Still, it hopefully does what it is supposed to do. 
+
+***
+
+- First we load the necessary packages
+
+```{r setup, results='hide', message=FALSE, warning=FALSE}
+library(iffitoR)
+library(plotly)
+library(glue)
+library(RODBC)
+library(forcats)
+library(dplyr)
+library(ggplot2)
+library(tools)
+library(stringr)
+library(sf)
+```
+
+
+- The idea is, that there are three important files each time the `make_shapefile` gets called
+  
+  + **A shapefile** (either of the points or polygons containing a column called `PIFF_ID`)
+  + **A database where each row represents an observed mass movement**  (*attribute database*)
+  + **A database with additional information** (*dictionary database*)
+
+- In the `attri`-argument we pass a vector of the columns that are already in the *attribute_database* and don't need any join to the dictionary database
+
+![](data/erd.png)
+
+# Specify the joins
+
+- In the `joins`-argument we pass a named list of hardcoded columns that are necessaey for the link and the data we actually want. The names are the `"<name_of_attributedatabase>.<table>.<column_to_link>"` and the values are `c("<name_of_dictionary_database>.<table><column_to_link>", "<name_of_dictionary_database>.<table><column_of_data_we_want")`
+
+- An example could look like this: 
+
+```{r}
+joins = list(
+  "tbl_frane.Geologia.litologia" = c(
+    "diz_frane.diz_litologie.litologia",
+    "diz_frane.diz_litologie.nome_litologia"
+  ),
+  
+  "tbl_frane.clas_ii_liv.movimento" = c(
+    "diz_frane.diz_movimenti.movimento",
+    "diz_frane.diz_movimenti.nome_movimento"
+  ),
+  "tbl_frane.Generalita.Cod_tipo" = c(
+    "diz_frane.diz_tipo_movi.cod_tipo",
+    "diz_frane.diz_tipo_movi.tipologia"
+  )
+)
+```
+
+
+# Build the shapefile
+
+- We only need to have the right paths at hand and the function `make_shapefile` will (hopefully) return an object of type `sf`
+
+- Important: The names of the databases are the names without any extension
+
+- Now we can call the function
+
+
+```{r paths}
+# I use the path to the databsaes on the Eurac Network (am I connected to the VPN?)
+
+# the path to the iffi polygons
+landslide_poly_path = "path_to_landslide_polygons"
+
+# the path to the iffi points
+landslide_point_path = "path_to_landslide_points" 
+
+# the path to the folder with the iffi-databases 
+database_dir = "path_to_iffidatabase" 
+```
+
+- the only thing missing are the attributes that come directly from the attributes database
+
+```{r}
+# we only want the dates from the attributes tables
+attri = c("anno_min",
+          "mese_min",
+          "giorno_min")
+```
+
+- now we can call the function
+
+```{r getdata, warning=F, message=F, cache=TRUE, eval=F}
+# this only works under windows and is therefore not run here
+os = Sys.info()["sysname"]
+
+if (os == "Windows") {
+  iffi_sf = iffitoR::make_shapefile(
+    database_dir = database_dir,
+    attribute_database_name = "tbl_frane",
+    dictionary_database_name = "diz_frane",
+    shapefile = landslide_point_path,
+    attri = attri,
+    joins = joins
+  )
+  
+}
+
+```
+
+
+```{r}
+# we will use the data from the package here
+iffi_sf = landsld
+```
+
+
+# Inspect the results
+
+```{r}
+dplyr::glimpse(iffi_sf)
+```
+
+## Translate the results
+
+- AS a first distinction events in the iffi-databse are classified according to two levels. The first level being a more coarse classification, and the second one a more detailed one
+
+- In Italian they are called **tipologia** (first level, more coarse) and **nome_movimento** (second level and finer)
+
+- The `iffitoR::translate_iffi`-function can be used to translate exactly those two columns. They will afterwards be called first_level and second_level
+
+- This function will fail, if the columns `tipologia` and `nome_movimento` are not queried in the joins
+
+```{r translate, eval=F}
+# if we are not working with the data from the package we still need to preprocess it a little bit
+if(os == "Windows"){
+  iffi_eng = iffitoR::translate_iffi(iffi_sf)
+  iffi_eng %>% select(c(first_level, second_level)) %>% head()
+}
+```
+
+## Get more time information
+
+- In order get some columns that make it easier to get an idea about the temporal information there is the function `get_date_information`
+
+- This creates the three integer columns `year.int`, `month.int` and `day.int`. In addition in creates two columns of class `date`. One beeing the exact date the other one the 1st of January of the year of the movement.
+
+```{r getdate, eval=F}
+# same for the time information that is alrady in the data from the package
+if(os=="Windows"){
+  iffi_date = iffitoR::get_date_information(iffi_eng)
+  iffi_date %>% select(matches("date|year|month|day")) %>% glimpse()
+}
+```
+
+# Get the information about the Polygons
+
+- The same could be done for the polygons in the iffidatabase
+
+```{r eval=F}
+if(os=="Windows"){
+iffi_sf_poly = iffitoR::make_shapefile(database_dir=database_dir,
+                                  attribute_database_name = "tbl_frane",
+                                  dictionary_database_name = "diz_frane",
+                                  shapefile = landslide_poly_path,
+                                  attri = attri,
+                                  joins=joins)
+}
+
+# how many polygons do we have?
+dim(iffi_sf_poly)
+```
+
+## filtering?
+
+- translate to english and get the date information as above.
+
+```{r translatepoly, eval=F}
+if(os=="Windows"){
+#trasnlate
+iffi_sf_poly = iffitoR::translate_iffi(iffi_sf_poly)
+
+# get date information
+iffi_sf_poly = iffitoR::get_date_information(iffi_sf_poly)
+}
+```
+
+## what have we got?
+
+- lets plot the distribution of different type
+
+```{r, fig.width=8, eval=F}
+
+# NOTRUN
+
+if(os=="Windows"){
+iffi_sf_poly %>% 
+  count(second_level, sort=T) %>% 
+  mutate(second_level = glue("{second_level} ({n})")) %>% 
+  mutate(second_level = fct_reorder(second_level, n)) %>% 
+  ggplot(aes(x=n, y=second_level)) +
+  geom_col()  +
+  labs(title="Distribution of polygons in the iffi database",
+       subtitle = "in the second-level classification",
+       x = "# of events",
+       y = "") +
+  theme_light()
+}
+```
+
+# when did the slides happen?
+
+```{r whenslides, fig.width=10, eval=F}
+
+# NOTRUN
+
+if(os=="Windows"){
+iffi_sf_poly %>% 
+  filter(year.int >= 1990) %>% 
+  filter(str_detect(second_level, "transla|rota")) %>% 
+  ggplot(aes(x=date, fill=second_level)) +
+  geom_histogram(position="dodge", bindwidth=30) +
+  scale_x_date(date_breaks = "1 year") +
+  theme_light() +
+  labs(x="", y="Number of Events", title="When did the slides happen?",
+       fill="") +
+  theme(
+    axis.text.x = element_text(angle=90)
+  )
+}
+```
+
+
+# Plot the Points
+
+- we use the data from the package so that this runs under Linus as well
+
+```{r plotpoints, fig.width=8}
+landsld %>% 
+  # filter(year.int > 1980) %>% 
+  count(second_level, sort = TRUE) %>% 
+  mutate(second_level = glue("{second_level} ({n})")) %>% 
+  mutate(second_level = fct_reorder(second_level, n)) %>% 
+  ggplot() +
+  geom_col(aes(x = n, y=second_level)) +
+  labs(title="Distribution of points in the iffi database",
+       subtitle = "in the second-level classification",
+       x = "# of events",
+       y = "") +
+  theme_light()
+```
+
+- now plot the time of occurence with plotly
+
+```{r timepoints, fig.width=8}
+landsld %>% 
+  filter(str_detect(second_level, "rotational|translational")) %>% 
+  filter(date_info != "no date") %>% st_drop_geometry() %>% 
+  plot_ly(data = ., x = ~year.posix, color=~second_level) %>% 
+  layout(title="Distriubtion of rotational and translational slides", legend=list(x=0.3, orientation="h", y=-0.2), xaxis = list(title="Year"), yaxis=list(title="# of slides"))
+```
+

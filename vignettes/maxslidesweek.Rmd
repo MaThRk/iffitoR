@@ -55,14 +55,14 @@ data_iffi %>%
   filter(str_detect(second_level, "translational")) %>% 
   count(date, sort=T)
 ```
-- On the 21st June of 2007 9 slides happened which is the max number of slides 
+- The 6th of Decemeber in 2020 was the day with the most translational Landslides (13) in the iffi-recording on one day.
 
 
 ## Visualize the max slides per day
 
 ```{r maxdayviz, fig.width=7, fig.height=7}
 dat = data_iffi %>% 
-  filter(date == as.Date("2007-06-21")) %>% 
+  filter(date == as.Date("2020-12-06")) %>% 
   st_transform(4326)
 
 
@@ -91,23 +91,28 @@ map %>% addLayersControl(overlayGroups = sl)
 
 # Aggregate per week
 
-```{r}
+```{r, echo=F, message=F, warning=F, fig.height=6, fig.width=10}
+library(showtext)
+library(extrafont)
+loadfonts()
+
 data_iffi %>% 
   filter(date_info == "day") %>% 
   filter(str_detect(second_level, "translational")) %>% 
   mutate(week = paste0(year.int, formatC(week(date), flag=0, width=2))) %>% 
   count(week, sort=T) %>% 
   mutate(first_day_of_week = as.Date(paste0(week, 1), "%Y%U%u")) %>% 
-  mutate(week = glue("{week}  ({n})")) %>% 
+  mutate(week = glue("{first_day_of_week}  ({n})")) %>% 
   mutate(week = fct_reorder(week, n)) %>% 
-  mutate(ishighlight = ifelse(n == 9, TRUE, FALSE)) %>% 
   head(n = 12) %>% 
   ggplot() +
-  geom_col(aes(x=n, y=week, fill=ishighlight)) +
-  scale_fill_manual(values = c("grey", "darkred"), guide=F) +
-  theme_light() +
+  geom_col(aes(x=n, y=week), color="black") +
+  theme_light(base_family="Times New Roman") +
   labs(x = "# of events per week",
        y = "Week",
-       title = "Weeks with highest number of Slides")
+       title = "Weeks with highest number of Slides") +
+  theme(
+    axis.title.y = element_blank()
+  )
 ```
 
