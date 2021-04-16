@@ -51,4 +51,4 @@ Some example queries, as welll as more information about the funcions in the pac
 
 ***
 
-![](man/figures/translational_movements_200820142018.png)
+![](man/figures/landslides_in_st_new_data.png)
