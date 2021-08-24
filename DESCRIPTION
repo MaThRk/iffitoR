@@ -19,10 +19,8 @@ Imports:
     GADMTools
 Suggests: 
     plotly,
-    testthat (>= 2.0.0),
     knitr,
     rmarkdown
-Config/testthat/edition: 2
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10),
