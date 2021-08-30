@@ -51,7 +51,7 @@ library(sf)
 
 - In the `attri`-argument we pass a vector of the columns that are already in the *attribute_database* and don't need any join to the dictionary database
 
-![](data/erd.png)
+![](../data/erd.png)
 
 # Specify the joins
 

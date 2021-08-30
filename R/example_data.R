@@ -10,3 +10,10 @@
 #'
 
 "landsld"
+
+#' The filtered data used for this thesis
+#'
+#' A dataset containing the locations of the landslides plus some additional variables
+#'
+#' @format A data frame with 523 rows and 31 variables:
+"filt_landslide"
