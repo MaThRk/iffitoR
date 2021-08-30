@@ -3,7 +3,7 @@
 \docType{data}
 \name{landsld}
 \alias{landsld}
-\title{Dataset with 8919 slides from South Tyrol and some additional informations}
+\title{Dataset with 10482 slides from South Tyrol and some additional informations (EPSG: 32362)}
 \format{
 An object of class \code{"sf"}
 }
@@ -11,6 +11,6 @@ An object of class \code{"sf"}
 data(landsld)
 }
 \description{
-Dataset with 8919 slides from South Tyrol and some additional informations
+Dataset with 10482 slides from South Tyrol and some additional informations (EPSG: 32362)
 }
 \keyword{dataset}

@@ -4,7 +4,7 @@
 \alias{find_tables}
 \title{find the necessary tables}
 \usage{
-find_tables(list_of_dfs_with_iffi_kodex, attributes)
+find_tables(list_of_dfs_with_iffi_kodex, attri)
 }
 \description{
 find the necessary tables

@@ -1,28 +1,30 @@
 Package: iffitoR
-Type: Package
-Title: Bring the iffi-data to R
-Version: 0.1.0
-Author: Robin Kohrs
-Maintainer: Robin <robin.kohrs@gmx.de>
-Description: The iffitoR-package fascilitates the access to data stored in the iffi-database and related products
-    Its main function returns an object of class sf that can then be used for further analysis.
-License: What license is it under?
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: What the package does (one paragraph).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to
+    pick a license
 Encoding: UTF-8
 LazyData: true
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Imports:
+Imports: 
     RODBC,
     dplyr,
     tools,
     sf,
     stringr,
-    GADMTools
-Suggests: 
-    plotly,
-    testthat (>= 2.0.0),
-    knitr,
-    rmarkdown
-Config/testthat/edition: 2
-VignetteBuilder: knitr
-Depends: 
-    R (>= 2.10),
+    GADMTools,
+    lubridate,
+    readxl,
+    tidyr,
+    tools
+    
+    
+  

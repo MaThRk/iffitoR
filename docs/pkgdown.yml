@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pandoc: 2.11.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
@@ -6,4 +7,14 @@ articles:
   connection: connection.html
   maxslidesweek: maxslidesweek.html
 last_built: 2021-04-15T11:12Z
+=======
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  connection: connection.html
+  Example: Example.html
+  maxslidesweek: maxslidesweek.html
+last_built: 2021-08-24T08:28Z
+>>>>>>> e291b80be16f147abd8680f0e146253246b90044
 

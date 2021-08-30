@@ -3,7 +3,7 @@
 \docType{data}
 \name{landsld_ita}
 \alias{landsld_ita}
-\title{Example landslide data from the iffi database with italian column-names}
+\title{Example landslide data from the iffi database with italian column-names (EPSG: 32632)}
 \format{
 An object of class \code{"sf"}
 }
@@ -11,6 +11,6 @@ An object of class \code{"sf"}
 data(landsld_ita)
 }
 \description{
-Example landslide data from the iffi database with italian column-names
+Example landslide data from the iffi database with italian column-names (EPSG: 32632)
 }
 \keyword{dataset}

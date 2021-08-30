@@ -55,10 +55,17 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+<<<<<<< HEAD
       <a href="articles/Example.html">Example retrieve from the iffi database using the `iffitoR`-minipackage</a>
     </li>
     <li>
       <a href="articles/connection.html">Setup the connections to a Microsoft Access Database in R</a>
+=======
+      <a href="articles/connection.html">Setup the connections to a Microsoft Access Database in R</a>
+    </li>
+    <li>
+      <a href="articles/Example.html">Example retrieve from the iffi database using the `iffitoR`-minipackage</a>
+>>>>>>> e291b80be16f147abd8680f0e146253246b90044
     </li>
     <li>
       <a href="articles/maxslidesweek.html">Maximum slides per week</a>
@@ -85,6 +92,7 @@
 <p><strong>INSTALL FROM GITHUB</strong></p>
 <p><code><a href="https://remotes.r-lib.org/reference/install_github.html">remotes::install_github("https://github.com/RobinKohrs/iffitoR")</a></code></p>
 <p><strong>INSTALL FROM GITLAB</strong></p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the paths to the public and private ssh-key</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>public <span class="ot">=</span> <span class="st">"C://PATH/TO/PUBLIC/id_rsa.pub"</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>private <span class="ot">=</span> <span class="st">"C://PATH/TO/PRIVATE/id_rsa"</span></span>
@@ -94,6 +102,17 @@
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># install it using devtools</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_git</span>(<span class="st">"git@gitlab.inf.unibz.it:proslide/iffitor.git"</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                      <span class="at">credentials =</span> creds)</span></code></pre></div>
+=======
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># the paths to the public and private ssh-key</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>public =<span class="st"> "C://PATH/TO/PUBLIC/id_rsa.pub"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3"></a>private =<span class="st"> "C://PATH/TO/PRIVATE/id_rsa"</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>creds =<span class="st"> </span>git2r<span class="op">::</span><span class="kw">cread_ssh_key</span>(public, private)</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># install it using devtools</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>devtools<span class="op">::</span><span class="kw">install_git</span>(<span class="st">"git@gitlab.inf.unibz.it:proslide/iffitor.git"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9"></a>                      <span class="dt">credentials =</span> creds)</span></code></pre></div>
+>>>>>>> e291b80be16f147abd8680f0e146253246b90044
 <p><strong>BUILD THE PACKAGE LOCALLY</strong></p>
 <p>In order to get the vignettes locally you can build the package yourself by:</p>
 <ol>
@@ -123,9 +142,15 @@
 <h2 class="hasAnchor">
 <a href="#more-information" class="anchor"></a>More information</h2>
 <p>Some example queries, as welll as more information about the funcions in the package can be found here:</p>
+<<<<<<< HEAD
 <p><a href="https://robinkohrs.github.io/iffitoR/docs/index.html">Vignettes</a></p>
 <hr>
 <p><img src="reference/figures/translational_movements_200820142018.png"></p>
+=======
+<p><a href="https://mathrk.github.io/iffitoR/docs/index.html">Vignettes</a></p>
+<hr>
+<p><img src="reference/figures/landslides_in_st_new_data.png"></p>
+>>>>>>> e291b80be16f147abd8680f0e146253246b90044
 </div>
 </div>
   </div>

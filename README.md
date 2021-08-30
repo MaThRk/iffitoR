@@ -47,8 +47,8 @@ When working under linux one will not be able to use the `RODBC`-functions in or
 
 Some example queries, as welll as more information about the funcions in the package can be found here:
 
-[Vignettes](https://robinkohrs.github.io/iffitoR/docs/index.html)
+[Vignettes](https://mathrk.github.io/iffitoR/docs/index.html)
 
 ***
 
-![](man/figures/translational_movements_200820142018.png)
+![](man/figures/landslides_in_st_new_data.png)

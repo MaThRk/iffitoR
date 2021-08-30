@@ -55,7 +55,7 @@ library(sf)
 
 # Specify the joins
 
-- In the `joins`-argument we pass a named list of hardcoded columns that are necessaey for the link and the data we actually want. The names are the `"<name_of_attributedatabase>.<table>.<column_to_link>"` and the values are `c("<name_of_dictionary_database>.<table><column_to_link>", "<name_of_dictionary_database>.<table><column_of_data_we_want")`
+- In the `joins`-argument we pass a named list of hardcoded columns that are necessary for the link and the data we actually want. The names are the `"<name_of_attributedatabase>.<table>.<column_to_link>"` and the values are `c("<name_of_dictionary_database>.<table><column_to_link>", "<name_of_dictionary_database>.<table><column_of_data_we_want")`
 
 - An example could look like this: 
 

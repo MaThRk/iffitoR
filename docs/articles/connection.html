@@ -54,10 +54,17 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+<<<<<<< HEAD
       <a href="../articles/Example.html">Example retrieve from the iffi database using the `iffitoR`-minipackage</a>
     </li>
     <li>
       <a href="../articles/connection.html">Setup the connections to a Microsoft Access Database in R</a>
+=======
+      <a href="../articles/connection.html">Setup the connections to a Microsoft Access Database in R</a>
+    </li>
+    <li>
+      <a href="../articles/Example.html">Example retrieve from the iffi database using the `iffitoR`-minipackage</a>
+>>>>>>> e291b80be16f147abd8680f0e146253246b90044
     </li>
     <li>
       <a href="../articles/maxslidesweek.html">Maximum slides per week</a>
@@ -75,13 +82,21 @@
 
       
 
+<<<<<<< HEAD
       </header><script src="connection_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
+=======
+      </header><script src="connection_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+>>>>>>> e291b80be16f147abd8680f0e146253246b90044
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Setup the connections to a Microsoft Access Database in R</h1>
                         <h4 class="author">robinr</h4>
             
+<<<<<<< HEAD
             <h4 class="date">2021-04-15</h4>
+=======
+            <h4 class="date">2021-08-24</h4>
+>>>>>>> e291b80be16f147abd8680f0e146253246b90044
       
       
       <div class="hidden name"><code>connection.Rmd</code></div>
@@ -95,14 +110,29 @@
 </ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">iffitoR</span><span class="op">)</span>
+<<<<<<< HEAD
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RODBC</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
 <span class="co">#&gt; here() starts at /home/rkohrs@eurac.edu/eurac/R/iffitoR</span></code></pre></div>
+=======
+<span class="co">#&gt; Registered S3 methods overwritten by 'tibble':</span>
+<span class="co">#&gt;   method     from  </span>
+<span class="co">#&gt;   format.tbl pillar</span>
+<span class="co">#&gt;   print.tbl  pillar</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">magrittr</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Paket 'magrittr' wurde unter R Version 4.0.3 erstellt</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">RODBC</span><span class="op">)</span>
+<span class="co">#&gt; Warning: Paket 'RODBC' wurde unter R Version 4.0.3 erstellt</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span>
+<span class="co">#&gt; Warning: Paket 'here' wurde unter R Version 4.0.3 erstellt</span>
+<span class="co">#&gt; here() starts at C:/Users/robin/eurac/R/iffitoR</span></code></pre></div>
+>>>>>>> e291b80be16f147abd8680f0e146253246b90044
 <ul>
 <li>connect to all the databases in the folder</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<<<<<<< HEAD
 <code class="sourceCode R">
 <span class="va">os</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.info.html">Sys.info</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="st">"sysname"</span><span class="op">]</span>
 <span class="kw">if</span><span class="op">(</span><span class="va">os</span> <span class="op">==</span> <span class="st">"Windows"</span><span class="op">)</span> <span class="op">{</span>
@@ -126,6 +156,178 @@
   <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"This wont work here...;)"</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="co">#&gt; [1] "This wont work here...;)"</span></code></pre></div>
+=======
+<code class="sourceCode R"><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; [1] "C:/Users/robin/eurac/R/iffitoR"</span>
+<span class="va">p</span> <span class="op">=</span> <span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span><span class="st">"inst/extdata/"</span><span class="op">)</span>
+<span class="va">connections</span> <span class="op">=</span> <span class="fu">iffitoR</span><span class="fu">::</span><span class="fu"><a href="../reference/set_connection.html">set_connection</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Found Databases: C:/Users/robin/eurac/R/iffitoR/inst/extdata/dic_db.mdb"</span>
+<span class="co">#&gt; [2] "Found Databases: C:/Users/robin/eurac/R/iffitoR/inst/extdata/test.mdb"</span></code></pre></div>
+<ul>
+<li>what have we got</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">connections</span>
+<span class="co">#&gt; $dic_db</span>
+<span class="co">#&gt; RODBC Connection 1</span>
+<span class="co">#&gt; Details:</span>
+<span class="co">#&gt;   case=nochange</span>
+<span class="co">#&gt;   DBQ=C:/Users/robin/eurac/R/iffitoR/inst/extdata/dic_db.mdb</span>
+<span class="co">#&gt;   Driver={Microsoft Access Driver (*.mdb, *.accdb)}</span>
+<span class="co">#&gt;   DriverId=25</span>
+<span class="co">#&gt;   FIL=MS Access</span>
+<span class="co">#&gt;   MaxBufferSize=2048</span>
+<span class="co">#&gt;   PageTimeout=5</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $test</span>
+<span class="co">#&gt; RODBC Connection 2</span>
+<span class="co">#&gt; Details:</span>
+<span class="co">#&gt;   case=nochange</span>
+<span class="co">#&gt;   DBQ=C:/Users/robin/eurac/R/iffitoR/inst/extdata/test.mdb</span>
+<span class="co">#&gt;   Driver={Microsoft Access Driver (*.mdb, *.accdb)}</span>
+<span class="co">#&gt;   DriverId=25</span>
+<span class="co">#&gt;   FIL=MS Access</span>
+<span class="co">#&gt;   MaxBufferSize=2048</span>
+<span class="co">#&gt;   PageTimeout=5</span></code></pre></div>
+<ul>
+<li>now we can convert all the tables in one connection into a list of dataframe, by:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># connect to the dictionary database</span>
+<span class="va">list_of_dfs</span> <span class="op">=</span> <span class="fu">iffitoR</span><span class="fu">::</span><span class="fu"><a href="../reference/make_list_dataframes.html">make_list_dataframes</a></span><span class="op">(</span><span class="va">connections</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">list_of_dfs</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"Colums-Names in"</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">list_of_dfs</span><span class="op">)</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">list_of_dfs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_acqua"</span>
+<span class="co">#&gt; [1] "acqua"      "nome_acqua"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_ad_le_na"</span>
+<span class="co">#&gt; [1] "cod_leg"     "descrizione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_archivi"</span>
+<span class="co">#&gt; [1] "cod_arch"    "descrizione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_assetti"</span>
+<span class="co">#&gt; [1] "assetto"      "nome_assetto"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_aut_bac"</span>
+<span class="co">#&gt; [1] "aut_bac"       "nome_autorita"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_carg"</span>
+<span class="co">#&gt; [1] "cod_carg"    "descrizione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_cause"</span>
+<span class="co">#&gt; [1] "causa"        "nome_causa"   "gruppo_cause"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_comuni"</span>
+<span class="co">#&gt; [1] "cod_com"     "nome_comune" "cod_pro"    </span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_danni_acque"</span>
+<span class="co">#&gt; [1] "danno_corso_acqua"      "nome_danno_corso_acqua"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_degradazioni"</span>
+<span class="co">#&gt; [1] "degradazione"      "nome_degradazione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_distribuzioni"</span>
+<span class="co">#&gt; [1] "distribuzione"      "nome_distribuzione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_elementi_rischio"</span>
+<span class="co">#&gt; [1] "element"       "nome_elemento" "cod_dan"      </span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_esp_ver"</span>
+<span class="co">#&gt; [1] "cod_esp_ver" "descrizione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_falde"</span>
+<span class="co">#&gt; [1] "falda"      "nome_falda"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_formazioni"</span>
+<span class="co">#&gt; [1] "sigla"      "nome_unita" "unita"     </span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_gradi_danno"</span>
+<span class="co">#&gt; [1] "grado"      "nome_grado"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_gruppi_cause"</span>
+<span class="co">#&gt; [1] "gruppo_cause"      "nome_gruppo_cause"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_gruppi_elementi_danno"</span>
+<span class="co">#&gt; [1] "cod_dan"     "descrizione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_gruppo_indagini"</span>
+<span class="co">#&gt; [1] "gruppo_indagini"      "nome_gruppo_indagini"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_gruppo_interventi"</span>
+<span class="co">#&gt; [1] "gruppo_intervento"      "nome_gruppo_intervento"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_gruppo_stati"</span>
+<span class="co">#&gt; [1] "cod_stato"   "descrizione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_indagini"</span>
+<span class="co">#&gt; [1] "indagine"        "nome_indagine"   "gruppo_indagini"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_interventi"</span>
+<span class="co">#&gt; [1] "intervento"        "nome_intervento"   "gruppo_intervento"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_litologie"</span>
+<span class="co">#&gt; [1] "litologia"      "nome_litologia"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_litotecniche"</span>
+<span class="co">#&gt; [1] "litotecnica"      "nome_litotecnica"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_materiali"</span>
+<span class="co">#&gt; [1] "materiale"      "nome_materiale"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_metodo"</span>
+<span class="co">#&gt; [1] "codmetodo"   "descrizione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_mime"</span>
+<span class="co">#&gt; [1] "cod_mime"    "descrizione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_movimenti"</span>
+<span class="co">#&gt; [1] "movimento"      "nome_movimento" "cod_tipo"      </span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_pendii"</span>
+<span class="co">#&gt; [1] "tipo_pendio" "nome_pendio"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_posizione"</span>
+<span class="co">#&gt; [1] "cod_pos"     "descrizione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_precursori"</span>
+<span class="co">#&gt; [1] "precursore"      "nome_precursore"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_province"</span>
+<span class="co">#&gt; [1] "cod_pro"        "nome_provincia" "cod_reg"        "sigla_pro"     </span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_regioni"</span>
+<span class="co">#&gt; [1] "cod_reg"      "nome_regione"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_sorgenti"</span>
+<span class="co">#&gt; [1] "sorgente"      "nome_sorgenti"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_spaziature"</span>
+<span class="co">#&gt; [1] "spaziatura"      "nome_spaziatura"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_stati"</span>
+<span class="co">#&gt; [1] "stato"      "nome_stato"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_stile"</span>
+<span class="co">#&gt; [1] "stile"      "nome_stile"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_strutture"</span>
+<span class="co">#&gt; [1] "struttura"      "nome_struttura"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_tipo_movi"</span>
+<span class="co">#&gt; [1] "cod_tipo"  "tipologia"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_usi_suolo"</span>
+<span class="co">#&gt; [1] "uso_suolo"      "nome_uso_suolo"</span>
+<span class="co">#&gt; [1] ""</span>
+<span class="co">#&gt; [1] "Colums-Names indiz_velocita"</span>
+<span class="co">#&gt; [1] "velocita"      "nome_velocita"</span>
+<span class="co">#&gt; [1] ""</span></code></pre></div>
+>>>>>>> e291b80be16f147abd8680f0e146253246b90044
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
